@@ -133,6 +133,18 @@ const FLOWS={
   mercantil:{n:'🏢 Mercantil y Empresa',i:'Para valorar tu caso <b>Mercantil</b>, necesito hacerte 3 preguntas.',
     q:[{t:'¿Cuál es tu situación?',o:['Conflicto entre socios','Concurso de acreedores','Contrato mercantil','Responsabilidad administrador','Propiedad intelectual','Constitución o disolución']},{t:'¿Hay procedimiento judicial activo?',o:['Sí, hay demanda o procedimiento','No, aún no']},{t:'¿La empresa está en riesgo de insolvencia?',o:['Sí, hay riesgo de insolvencia','No, la empresa está operativa']}],
     tr:(r)=>r.some(x=>x.includes('Concurso'))||r.some(x=>x.includes('insolvencia'))?'red':r.some(x=>x.includes('socios'))||r.some(x=>x.includes('demanda'))?'yellow':'green'},
+  bancario:{n:'🏦 Derecho Bancario',i:'Para valorar tu caso <b>Bancario</b>, necesito hacerte unas preguntas. Todo es confidencial.',
+    q:[
+      {t:'¿Cuál es tu situación?',o:['Tarjeta revolving','Financiación de vehículo (TAE incorrecto)','Microcrédito / Préstamo urgente','Hipoteca / cláusulas abusivas','Otro producto bancario']},
+      {t:'¿Con qué entidad o empresa tienes el problema?',o:['WiZink / Carrefour / Cofidis / Cetelem','Concesionario o financiera de coche','MyKredit / Vivus / MoneyMan / Avafin','Cashper / SmartCrédito / otra fintech','Banco tradicional (BBVA, Santander, etc.)']},
+      {t:'¿Cuántos contratos o productos tienes con esa entidad?',o:['1 contrato','2 contratos','3 o más contratos','No estoy seguro/a']}
+    ],
+    tr:(r)=>{
+      if(r.some(x=>x.includes('3 o más'))) return 'red';
+      if(r.some(x=>x.includes('2 contratos')||x.includes('revolving')||x.includes('TAE')||x.includes('MyKredit')||x.includes('Vivus')||x.includes('MoneyMan')||x.includes('Avafin')||x.includes('Cashper')||x.includes('SmartCrédito'))) return 'yellow';
+      return 'green';
+    }
+  },
   administrativo:{n:'📋 Derecho Administrativo',i:'Para valorar tu caso <b>Administrativo</b>, necesito hacerte 3 preguntas.',
     q:[{t:'¿Cuál es tu situación?',o:['Sanción o multa','Recurso frente a Administración','Licencias y permisos','Expropiación','Contratación pública','Otro asunto administrativo']},{t:'¿Tienes un plazo de recurso próximo?',o:['Sí, el plazo vence pronto','No, tengo tiempo']},{t:'¿Ya has presentado algún recurso?',o:['Sí, ya he recurrido','No, aún no he actuado']}],
     tr:(r)=>r.some(x=>x.includes('vence pronto'))?'red':r.some(x=>x.includes('Sanción'))||r.some(x=>x.includes('Expropiación'))?'yellow':'green'},
@@ -145,7 +157,7 @@ const TD={
 let open=false,inited=false,step=null,data={};
 function toggle(){open=!open;document.getElementById('cw').style.display=open?'flex':'none';document.querySelector('#cb .notif').style.display='none';if(open&&!inited){inited=true;setTimeout(init,350);}if(open)setTimeout(()=>document.getElementById('ci').focus(),100);}
 function chatStart(a){if(!open)toggle();setTimeout(()=>startArea(a),open?100:500);}
-function init(){addMsg('b','Bienvenido al <b>Agente IA</b> del despacho.<br><br>Selecciona tu área legal y evaluaré la urgencia de tu caso con 3 preguntas — confidencial y sin compromiso.');setTimeout(()=>setQR(['⚖️ Familia','💼 Laboral','🔒 Penal','🏛️ Civil/Herencias','🌍 Extranjería','🏠 Inmobiliario','🏢 Mercantil','📋 Administrativo']),400);}
+function init(){addMsg('b','Bienvenido al <b>Agente IA</b> del despacho.<br><br>Selecciona tu área legal y evaluaré la urgencia de tu caso con 3 preguntas — confidencial y sin compromiso.');setTimeout(()=>setQR(['⚖️ Familia','💼 Laboral','🔒 Penal','🏛️ Civil/Herencias','🌍 Extranjería','🏠 Inmobiliario','🏢 Mercantil','📋 Administrativo','🏦 Bancario']),400);}
 function startArea(a){const f=FLOWS[a];if(!f)return;data={a,rs:[],n:'',t:'',lv:null,qi:0};step='triage';addMsg('b',f.i+'<br><br>'+f.q[0].t);setTimeout(()=>setQR(f.q[0].o),300);}
 async function proc(txt){
   addMsg('u',txt);setQR([]);
@@ -157,9 +169,9 @@ async function proc(txt){
   }
   if(step==='nombre'){data.n=txt;step='tel';showTyping();await dl(400);stopTyping();addMsg('b','Gracias <b>'+txt+'</b>. ¿Tu teléfono de contacto?');return;}
   if(step==='tel'){data.t=txt;step=null;showTyping();await dl(600);stopTyping();showConfirm();return;}
-  const am={'⚖️ Familia':'familia','💼 Laboral':'laboral','🔒 Penal':'penal','🏛️ Civil/Herencias':'civil','🌍 Extranjería':'extranjeria','🏠 Inmobiliario':'inmobiliario','🏢 Mercantil':'mercantil','📋 Administrativo':'administrativo'};
+  const am={'⚖️ Familia':'familia','💼 Laboral':'laboral','🔒 Penal':'penal','🏛️ Civil/Herencias':'civil','🌍 Extranjería':'extranjeria','🏠 Inmobiliario':'inmobiliario','🏢 Mercantil':'mercantil','📋 Administrativo':'administrativo','🏦 Bancario':'bancario'};
   if(am[txt]){startArea(am[txt]);return;}
-  if(txt==='Nueva consulta'){data={a:null,rs:[],n:'',t:'',lv:null,qi:0};step=null;addMsg('b','¿En qué área legal puedo ayudarte?');setTimeout(()=>setQR(['⚖️ Familia','💼 Laboral','🔒 Penal','🏛️ Civil/Herencias','🌍 Extranjería','🏠 Inmobiliario','🏢 Mercantil','📋 Administrativo']),300);return;}
+  if(txt==='Nueva consulta'){data={a:null,rs:[],n:'',t:'',lv:null,qi:0};step=null;addMsg('b','¿En qué área legal puedo ayudarte?');setTimeout(()=>setQR(['⚖️ Familia','💼 Laboral','🔒 Penal','🏛️ Civil/Herencias','🌍 Extranjería','🏠 Inmobiliario','🏢 Mercantil','📋 Administrativo','🏦 Bancario']),300);return;}
   showTyping();await dl(400);stopTyping();addMsg('b','¿En qué área legal puedo ayudarte?');setTimeout(()=>setQR(['⚖️ Familia','💼 Laboral','🔒 Penal','🏛️ Civil/Herencias','🌍 Extranjería','🏠 Inmobiliario','🏢 Mercantil','📋 Administrativo']),300);
 }
 function showTriage(lv,nombre){
@@ -176,7 +188,8 @@ function showConfirm(){
   const av=document.createElement('div');av.className='mav';av.innerHTML='<svg width="16" height="16"><use href="#robot"/></svg>';
   const bbl=document.createElement('div');bbl.className='bbl';bbl.style.cssText='padding:0;overflow:hidden;border-radius:16px 16px 16px 4px;';
   const note=document.createElement('div');note.style.cssText='padding:10px 13px;font-size:.79rem;line-height:1.65;';
-  note.innerHTML='Resumen del caso:<br><br><b>Área:</b> '+f.n+'<br><b>Urgencia:</b> <span style="color:'+td.c+';font-weight:700;">'+td.t+'</span><br><b>Nombre:</b> '+data.n+'<br><b>Tel:</b> '+data.t+'<br><br><small style="color:#5a5a70">Información estrictamente confidencial.</small>';
+  const resumenRespuestas = data.rs && data.rs.length ? data.rs.map((r,i)=>'<br><b>R'+(i+1)+':</b> '+r).join('') : '';
+  note.innerHTML='<b style="font-size:.85rem;color:#f0f0f5;">Resumen del lead:</b><br><br><b>Área:</b> '+f.n+'<br><b>Urgencia:</b> <span style="color:'+td.c+';font-weight:700;">'+td.t+'</span>'+resumenRespuestas+'<br><b>Nombre:</b> '+data.n+'<br><b>Tel:</b> '+data.t+'<br><br><small style="color:#5a5a70">Información estrictamente confidencial.</small>';
   const btn=document.createElement('button');btn.className='wa-btn';btn.style.background=td.c;
   btn.innerHTML='<svg width="13" height="13" viewBox="0 0 32 32" fill="white" style="vertical-align:middle;margin-right:6px"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.49.638 4.83 1.757 6.865L2 30l7.331-1.724A13.916 13.916 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2z"/></svg>Confirmar y contactar abogado';
   btn.onclick=enviarWA;
@@ -185,7 +198,8 @@ function showConfirm(){
 }
 function enviarWA(){
   const f=FLOWS[data.a];const td=TD[data.lv];
-  const t='['+td.wa+'] '+f.n+' | Urgencia: '+td.t+' | Nombre: '+data.n+' | Tel: '+data.t+' | Respuestas: '+data.rs.join(' / ');
+  const rsLabels = data.rs && data.rs.length ? '\n\nDetalle del caso:\n'+data.rs.map((r,i)=>'  '+(i+1)+'. '+r).join('\n') : '';
+  const t='['+td.wa+'] '+f.n+' | Urgencia: '+td.t+' | Nombre: '+data.n+' | Tel: '+data.t+rsLabels;
   window.open('https://wa.me/34643199580?text='+encodeURIComponent(t),'_blank');
   showTyping();setTimeout(()=>{stopTyping();addMsg('b','✅ Enviado. Un abogado especializado te contactará con la prioridad indicada. Toda la información es confidencial.');setTimeout(()=>setQR(['Nueva consulta']),400);},800);
 }
