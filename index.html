@@ -102,7 +102,7 @@ Que tipo de asunto necesita tratar?</div>
   <div class="chat-footer">Powered by <a href="https://whitemoon.es" target="_blank">WhiteMoon</a> - Agencia de IA</div>
 </div>
 <script>
-var WEBHOOK_URL='';
+var WEBHOOK_URL='https://whitemoon.app.n8n.cloud/webhook/chatbot-abogado';
 var state={step:0,area:'',name:'',apellidos:'',tel:'',email:'',descripcion:'',urgencia:'',triage:''};
 
 function addMsg(text,type){var c=document.getElementById('msgs');var d=document.createElement('div');d.className='msg '+(type||'bot');d.textContent=text;c.appendChild(d);c.scrollTop=c.scrollHeight}
