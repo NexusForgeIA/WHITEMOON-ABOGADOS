@@ -3,217 +3,651 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>WhiteMoon — Chatbot IA para Despachos de Abogados</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>WhiteMoon Abogados — Defendemos sus derechos</title>
+<meta name="description" content="WhiteMoon Abogados — Asesoramiento jurídico integral. Civil, laboral, penal, mercantil, familia y bancario. Primera consulta gratuita.">
+<meta name="theme-color" content="#1a2b4a">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0a12;--card:#111119;--border:#1e1e2e;--main:#1a2b4a;--main-light:rgba(26,43,74,.15);--main-mid:rgba(26,43,74,.3);--gold:#c9a868;--gold-light:rgba(201,168,104,.12);--gold-mid:rgba(201,168,104,.25);--green:#22c55e;--red:#ef4444;--orange:#f59e0b;--text:#e0e0e0;--muted:#888;--white:#fff}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:20px;position:relative}
-body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 40%,rgba(26,43,74,.1) 0%,transparent 50%),radial-gradient(circle at 70% 60%,rgba(201,168,104,.05) 0%,transparent 50%);pointer-events:none}
-.header{text-align:center;margin-bottom:30px;position:relative;z-index:1}
-.logo{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px}
-.logo-text{font-size:1.6rem;font-weight:800;color:var(--white);letter-spacing:-.02em}.logo-text span{color:var(--gold)}
-.header p{color:var(--muted);font-size:.88rem;font-weight:300}
-.badge{display:inline-flex;align-items:center;gap:6px;background:var(--main-light);border:1px solid var(--main-mid);color:var(--gold);padding:5px 14px;border-radius:20px;font-size:.7rem;font-weight:600;margin-top:10px;letter-spacing:.03em}
-.badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.chat-container{width:100%;max-width:420px;background:var(--card);border:1px solid var(--border);border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative;z-index:1;display:flex;flex-direction:column}
-.chat-head{background:linear-gradient(135deg,var(--main),#2c4570);padding:18px;color:var(--white);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;border-bottom:2px solid var(--gold)}
-.chat-head-info{display:flex;align-items:center;gap:12px}
-.chat-head-name{font-weight:700;font-size:.95rem}.chat-head-sub{font-size:.7rem;opacity:.75;display:flex;align-items:center;gap:4px}
+:root{
+  --main:#1a2b4a;--main-dark:#142039;--main-light:rgba(26,43,74,.08);--main-mid:rgba(26,43,74,.25);
+  --gold:#c9a868;--gold-light:rgba(201,168,104,.12);--gold-mid:rgba(201,168,104,.3);
+  --green:#22c55e;--red:#ef4444;--orange:#f59e0b;
+  --bone:#faf8f3;--bone-2:#f3efe6;--ink:#1f2330;--text:#3a3a3a;--muted:#6b6f7a;--line:#e6e1d4;--white:#fff;
+  --chat-bg:#0a0a12;--chat-card:#111119;--chat-border:#1e1e2e;--chat-text:#e0e0e0;
+}
+html,body{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bone);color:var(--text);line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block}
+
+/* ============== HEADER ============== */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(250,248,243,.92);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
+.site-header .wrap{max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:700;color:var(--ink);font-size:1.15rem;letter-spacing:.01em}
+.brand .crest{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--main),var(--main-dark));color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:1.5px solid var(--gold);flex-shrink:0}
+.brand small{font-family:'Outfit',sans-serif;font-weight:500;color:var(--muted);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;display:block;margin-top:2px}
+.nav{display:flex;align-items:center;gap:28px}
+.nav a{color:var(--ink);text-decoration:none;font-size:.92rem;font-weight:500;transition:color .2s}
+.nav a:hover{color:var(--main)}
+.nav .cta{background:var(--main);color:var(--white);padding:10px 18px;border-radius:6px;border:1px solid var(--main);font-size:.86rem;font-weight:600}
+.nav .cta:hover{background:var(--main-dark);color:var(--gold)}
+.hamburger{display:none;background:transparent;border:none;cursor:pointer;width:38px;height:38px;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:0}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink);transition:all .25s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:900px){
+  .nav{position:fixed;top:0;right:-100%;width:78%;max-width:320px;height:100vh;background:var(--bone);flex-direction:column;align-items:flex-start;padding:90px 28px 28px;gap:20px;box-shadow:-10px 0 40px rgba(0,0,0,.18);transition:right .3s ease;z-index:60}
+  .nav.open{right:0}
+  .nav a{font-size:1.05rem;width:100%;padding:8px 0;border-bottom:1px solid var(--line)}
+  .nav .cta{width:100%;text-align:center;border:1px solid var(--main);margin-top:8px}
+  .hamburger{display:flex;z-index:70}
+}
+.nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:55}
+.nav-overlay.show{display:block}
+
+/* ============== HERO ============== */
+.hero{position:relative;padding:80px 24px 60px;background:linear-gradient(180deg,var(--bone) 0%,var(--bone-2) 100%);border-bottom:1px solid var(--line);overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(201,168,104,.12) 0%,transparent 55%),radial-gradient(ellipse at 10% 90%,rgba(26,43,74,.08) 0%,transparent 50%);pointer-events:none}
+.hero .wrap{max-width:1180px;margin:0 auto;position:relative;display:grid;grid-template-columns:1.05fr 1fr;gap:54px;align-items:center}
+.hero .text .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--main);font-weight:600;margin-bottom:18px}
+.hero .text .eyebrow::before{content:'';width:30px;height:1px;background:var(--gold)}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.6vw,3.3rem);font-weight:700;color:var(--ink);line-height:1.15;margin-bottom:20px;letter-spacing:-.01em}
+.hero h1 em{font-style:italic;color:var(--main);font-weight:600}
+.hero p{font-size:1.05rem;color:var(--muted);max-width:580px;margin:0 0 32px;font-weight:300}
+.hero .btns{display:flex;gap:14px;flex-wrap:wrap}
+.hero-img{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(26,43,74,.18);aspect-ratio:4/5;border:1px solid var(--line)}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+.hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(26,43,74,.4) 100%);pointer-events:none}
+@media(max-width:900px){
+  .hero{padding:60px 24px 40px}
+  .hero .wrap{grid-template-columns:1fr;gap:36px;text-align:center}
+  .hero .text .eyebrow{justify-content:center}
+  .hero .btns{justify-content:center}
+  .hero p{margin-left:auto;margin-right:auto}
+  .hero-img{max-width:420px;margin:0 auto;aspect-ratio:1/1}
+}
+@media(max-width:600px){
+  .hero{padding:48px 18px 36px}
+  .hero .btns{flex-direction:column}
+  .hero .btns a{width:100%;justify-content:center}
+}
+.btn-primary{background:var(--main);color:var(--white);padding:14px 28px;border:1px solid var(--main);border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-primary:hover{background:var(--main-dark);color:var(--gold);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--ink);padding:14px 28px;border:1px solid var(--main-mid);border-radius:6px;font-size:.95rem;font-weight:500;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-ghost:hover{border-color:var(--main);background:var(--main-light)}
+
+/* ============== STATS ============== */
+.stats{max-width:1180px;margin:-30px auto 0;padding:0 24px;position:relative;z-index:2}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:32px 24px;box-shadow:0 12px 40px rgba(26,43,74,.06)}
+.stat{text-align:center;border-right:1px solid var(--line);padding:6px 8px}
+.stat:last-child{border-right:none}
+.stat .num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--main);line-height:1}
+.stat .num span{color:var(--gold)}
+.stat .lbl{font-size:.78rem;color:var(--muted);margin-top:6px;letter-spacing:.04em}
+@media(max-width:600px){.stats-grid{grid-template-columns:1fr;padding:18px}.stat{border-right:none;border-bottom:1px solid var(--line);padding:14px 0}.stat:last-child{border-bottom:none}}
+
+/* ============== SECTIONS ============== */
+.section{padding:90px 24px}
+.section .wrap{max-width:1180px;margin:0 auto}
+.section-head{text-align:center;margin-bottom:54px}
+.section-head .kicker{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px}
+.section-head h2{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3.6vw,2.4rem);color:var(--ink);font-weight:700;line-height:1.2}
+.section-head p{color:var(--muted);max-width:600px;margin:14px auto 0;font-size:.98rem}
+@media(max-width:600px){.section{padding:60px 18px}.section-head{margin-bottom:36px}}
+
+/* ============== AREAS ============== */
+.areas{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:900px){.areas{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.areas{grid-template-columns:1fr;gap:18px}}
+.area-card{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:all .25s;display:flex;flex-direction:column}
+.area-card:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(26,43,74,.12);border-color:var(--main-mid)}
+.area-img{aspect-ratio:16/10;overflow:hidden;background:var(--bone-2)}
+.area-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.area-card:hover .area-img img{transform:scale(1.05)}
+.area-body{padding:22px 22px 24px}
+.area-icon{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:8px;background:var(--main-light);font-size:1.15rem;margin-bottom:12px}
+.area-card h3{font-family:'Playfair Display',serif;color:var(--ink);font-size:1.18rem;font-weight:700;margin-bottom:8px}
+.area-card p{color:var(--muted);font-size:.9rem;line-height:1.6}
+
+/* ============== TEAM ============== */
+.team-section{background:var(--bone-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:900px){.team{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.team{grid-template-columns:1fr;gap:18px}}
+.team-card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:28px 24px;text-align:center;transition:all .25s}
+.team-card:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(26,43,74,.08)}
+.team-photo{width:120px;height:120px;border-radius:50%;overflow:hidden;margin:0 auto 18px;border:3px solid var(--gold);box-shadow:0 6px 22px rgba(26,43,74,.18)}
+.team-photo img{width:100%;height:100%;object-fit:cover}
+.team-card h4{font-family:'Playfair Display',serif;color:var(--ink);font-size:1.15rem;font-weight:700;margin-bottom:6px}
+.team-card .role{color:var(--main);font-size:.85rem;font-weight:600;margin-bottom:4px}
+.team-card .col{color:var(--muted);font-size:.78rem;letter-spacing:.04em}
+
+/* ============== GALLERY ============== */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.gallery{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.gallery{grid-template-columns:1fr;gap:12px}}
+.gallery-item{aspect-ratio:4/3;border-radius:12px;overflow:hidden;border:1px solid var(--line);position:relative}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.gallery-item:hover img{transform:scale(1.06)}
+.gallery-item::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(26,43,74,.35) 100%);pointer-events:none}
+
+/* ============== FOOTER ============== */
+.site-footer{background:var(--ink);color:#cdd1da;padding:60px 24px 30px;border-top:3px solid var(--gold)}
+.site-footer .wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+@media(max-width:900px){.site-footer .wrap{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:600px){.site-footer{padding:48px 18px 24px}.site-footer .wrap{grid-template-columns:1fr;gap:26px}}
+.site-footer h5{font-family:'Playfair Display',serif;color:var(--white);font-size:1rem;margin-bottom:14px;font-weight:700}
+.site-footer p,.site-footer a{font-size:.88rem;color:#9ca0aa;line-height:1.8;text-decoration:none}
+.site-footer a:hover{color:var(--gold)}
+.site-footer .brand-foot{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:700;color:var(--white);font-size:1.15rem;margin-bottom:14px}
+.site-footer .brand-foot .crest{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--main),var(--main-dark));color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1rem;border:1.5px solid var(--gold)}
+.copyright{max-width:1180px;margin:40px auto 0;padding-top:24px;border-top:1px solid #2a2e3c;text-align:center;font-size:.78rem;color:#6b6f7a}
+
+/* ============== FAB / TEASER ============== */
+.fab{position:fixed;right:24px;bottom:24px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--main),#2c4570);border:2px solid var(--gold);color:var(--gold);font-size:1.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(26,43,74,.4);z-index:9999;transition:transform .2s,opacity .25s;font-family:inherit}
+.fab:hover{transform:scale(1.06)}
+.fab.hidden{opacity:0;pointer-events:none;transform:scale(.8)}
+.fab::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--gold);opacity:.6;animation:fabPulse 2s infinite}
+@keyframes fabPulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.4);opacity:0}}
+@media(max-width:600px){.fab{width:56px;height:56px;right:16px;bottom:16px;font-size:1.5rem}}
+
+.teaser{position:fixed;right:100px;bottom:36px;background:var(--white);color:var(--ink);padding:12px 16px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.18);font-size:.86rem;font-weight:500;z-index:9998;display:none;align-items:center;gap:10px;border:1px solid var(--line);max-width:280px;animation:teaserIn .4s ease-out}
+.teaser::after{content:'';position:absolute;right:-8px;top:50%;transform:translateY(-50%);border:8px solid transparent;border-left-color:var(--white)}
+.teaser .x{cursor:pointer;color:var(--muted);font-size:1.1rem;line-height:1;padding:0 2px}
+.teaser .x:hover{color:var(--ink)}
+@keyframes teaserIn{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:none}}
+@media(max-width:600px){.teaser{right:84px;bottom:28px;font-size:.78rem;max-width:200px;padding:10px 12px}}
+
+/* ============== CHAT ============== */
+.chat-window{position:fixed;right:24px;bottom:104px;width:380px;height:600px;max-height:calc(100vh - 130px);background:var(--chat-card);border:1px solid var(--chat-border);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.45);z-index:9999;display:none;flex-direction:column;overflow:hidden;font-family:'Outfit',sans-serif;color:var(--chat-text)}
+.chat-window.open{display:flex;animation:slideUp .3s ease-out}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@media(max-width:600px){.chat-window{right:0;left:0;bottom:0;width:100vw;height:100vh;max-height:100vh;border-radius:0}}
+
+.chat-head{background:linear-gradient(135deg,var(--main),#2c4570);padding:16px 18px;color:var(--white);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;border-bottom:2px solid var(--gold)}
+.chat-head-info{display:flex;align-items:center;gap:12px;min-width:0}
+.chat-avatar{width:40px;height:40px;border-radius:12px;background:var(--main-dark);border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--gold);flex-shrink:0}
+.chat-head-name{font-weight:700;font-size:.92rem;line-height:1.2}
+.chat-head-sub{font-size:.7rem;opacity:.78;display:flex;align-items:center;gap:5px;margin-top:3px}
 .chat-head-sub::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green)}
-.chat-msgs{flex:1;overflow-y:auto;padding:18px;background:#0d0d18;scroll-behavior:smooth;min-height:300px;max-height:55vh}
-.chat-msgs::-webkit-scrollbar{width:4px}.chat-msgs::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+.chat-close{background:rgba(255,255,255,.1);border:none;color:var(--white);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s,opacity .25s;font-family:inherit;flex-shrink:0}
+.chat-close:hover{background:rgba(255,255,255,.22)}
+.chat-close.hidden{display:none}
+
+.chat-msgs{flex:1;overflow-y:auto;padding:18px;background:#0d0d18;scroll-behavior:smooth}
+.chat-msgs::-webkit-scrollbar{width:4px}.chat-msgs::-webkit-scrollbar-thumb{background:var(--chat-border);border-radius:4px}
 .msg{max-width:85%;margin-bottom:10px;padding:12px 16px;font-size:.84rem;line-height:1.55;animation:msgIn .3s ease-out;white-space:pre-line}
 @keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.msg.bot{background:var(--main-light);border:1px solid var(--main-mid);color:var(--text);border-radius:16px 16px 16px 4px}
+.msg.bot{background:var(--main-light);border:1px solid var(--main-mid);color:var(--chat-text);border-radius:16px 16px 16px 4px}
 .msg.user{background:linear-gradient(135deg,var(--main),#2c4570);color:var(--white);margin-left:auto;border-radius:16px 16px 4px 16px}
 .quick-btns{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-.quick-btn{background:rgba(26,43,74,.1);border:1px solid var(--main-mid);color:var(--gold);border-radius:20px;padding:7px 16px;font-size:.76rem;cursor:pointer;font-family:inherit;font-weight:500;transition:all .2s}
+.quick-btn{background:rgba(26,43,74,.18);border:1px solid var(--main-mid);color:var(--gold);border-radius:20px;padding:7px 14px;font-size:.76rem;cursor:pointer;font-family:inherit;font-weight:500;transition:all .2s;text-align:left}
 .quick-btn:hover{background:var(--main);color:var(--white);transform:translateY(-1px)}
+
+/* Typing dots */
+.typing{display:inline-flex;gap:4px;align-items:center;padding:14px 16px;background:var(--main-light);border:1px solid var(--main-mid);border-radius:16px 16px 16px 4px;margin-bottom:10px;width:fit-content}
+.typing span{width:7px;height:7px;border-radius:50%;background:var(--gold);opacity:.5;animation:typingDot 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.2s}
+.typing span:nth-child(3){animation-delay:.4s}
+@keyframes typingDot{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+
 .triage-info{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:12px 14px;margin-bottom:10px;font-size:.78rem;color:var(--orange);line-height:1.5}
 .triage-info strong{color:#fbbf24}
-.chat-input{padding:14px;border-top:1px solid var(--border);display:flex;gap:10px;background:var(--card);flex-shrink:0}
-.chat-input input{flex:1;background:#0d0d18;border:1px solid var(--border);border-radius:22px;padding:12px 18px;font-size:.9rem;color:var(--white);font-family:inherit;outline:none;transition:border .2s;min-width:0}
-.chat-input input:focus{border-color:var(--gold)}.chat-input input::placeholder{color:#555}
-.send-btn{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--main),#2c4570);border:1px solid var(--gold);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:0 3px 12px rgba(26,43,74,.3);flex-shrink:0}
+.chat-input{padding:14px;border-top:1px solid var(--chat-border);display:flex;gap:10px;background:var(--chat-card);flex-shrink:0}
+.chat-input input{flex:1;background:#0d0d18;border:1px solid var(--chat-border);border-radius:22px;padding:11px 16px;font-size:.88rem;color:var(--white);font-family:inherit;outline:none;transition:border .2s;min-width:0}
+.chat-input input:focus{border-color:var(--gold)}
+.chat-input input::placeholder{color:#555}
+.send-btn{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--main),#2c4570);border:1px solid var(--gold);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
 .send-btn:hover{transform:scale(1.05);background:var(--gold);border-color:var(--gold)}
-.send-btn svg{width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:2}
+.send-btn svg{width:15px;height:15px;stroke:var(--gold);fill:none;stroke-width:2}
 .send-btn:hover svg{stroke:var(--main)}
-.chat-footer{text-align:center;padding:8px;font-size:.6rem;color:#444;background:var(--card);border-top:1px solid rgba(255,255,255,.03)}.chat-footer a{color:#555}
-.wa-confirm{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);border-radius:14px;padding:16px;margin-bottom:10px;text-align:center}
-.wa-confirm .wa-icon{font-size:2rem;margin-bottom:8px}.wa-confirm .wa-title{font-weight:700;color:var(--green);font-size:.88rem;margin-bottom:4px}
-.wa-confirm .wa-text{font-size:.76rem;color:var(--muted);line-height:1.5}
-.triage-red{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3)}
-.triage-red .wa-title{color:var(--red)}
-.triage-red .wa-text strong{color:#fca5a5}
-.triage-yellow{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3)}
-.triage-yellow .wa-title{color:var(--orange)}
-.triage-yellow .wa-text strong{color:#fbbf24}
-.disclaimer{background:rgba(201,168,104,.06);border:1px solid rgba(201,168,104,.2);border-radius:10px;padding:10px 12px;font-size:.7rem;color:var(--muted);line-height:1.5;margin-bottom:10px}
+.chat-footer{text-align:center;padding:8px;font-size:.6rem;color:#555;background:var(--chat-card);border-top:1px solid rgba(255,255,255,.04)}
+.chat-footer a{color:#777;text-decoration:none}
+
+.wa-confirm{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.18);border-radius:14px;padding:16px;margin-bottom:10px;text-align:center}
+.wa-confirm .wa-icon{font-size:2rem;margin-bottom:8px}
+.wa-confirm .wa-title{font-weight:700;color:var(--green);font-size:.88rem;margin-bottom:4px}
+.wa-confirm .wa-text{font-size:.76rem;color:#9ca3af;line-height:1.55}
+.disclaimer{background:rgba(201,168,104,.06);border:1px solid rgba(201,168,104,.2);border-radius:10px;padding:10px 12px;font-size:.7rem;color:#9ca3af;line-height:1.5;margin-bottom:10px}
 .disclaimer strong{color:var(--gold)}
-@media(max-width:480px){body{padding:8px}.header{margin-bottom:10px}.header p{font-size:.76rem}.logo-text{font-size:1.2rem}.badge{font-size:.65rem;padding:4px 10px}.chat-container{border-radius:16px;max-width:100%;flex:1}.chat-msgs{max-height:calc(100vh - 260px);min-height:200px;padding:12px}.chat-head{padding:12px}.chat-head-name{font-size:.86rem}.chat-input{padding:10px}.chat-input input{padding:10px 14px;font-size:.86rem}.msg{font-size:.8rem;padding:10px 12px}.quick-btn{font-size:.72rem;padding:6px 12px}}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:#22c55e;color:#fff;border:none;border-radius:12px;padding:13px 16px;font-size:.86rem;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none;width:100%;margin-bottom:10px;transition:all .2s;box-shadow:0 4px 14px rgba(34,197,94,.3)}
+.wa-btn:hover{background:#16a34a;transform:translateY(-1px)}
+.wa-btn svg{width:18px;height:18px;fill:#fff}
 </style>
 </head>
 <body>
-<div class="header">
-  <div class="logo">
-    <img src="data:image/jpeg;base64,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" style="height:48px;border-radius:14px">
-    <div class="logo-text">WHITE<span>MOON</span></div>
+
+<!-- ============== HEADER ============== -->
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand">
+      <div class="crest">⚖️</div>
+      <div>WhiteMoon Abogados<small>Asesoría jurídica integral</small></div>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="#areas" onclick="closeNav()">Áreas</a>
+      <a href="#equipo" onclick="closeNav()">Equipo</a>
+      <a href="#galeria" onclick="closeNav()">Despacho</a>
+      <a href="#contacto" onclick="closeNav()">Contacto</a>
+      <a href="#" class="cta" onclick="closeNav();toggleChat();return false">Consulta gratuita</a>
+    </nav>
   </div>
-  <p>Chatbot IA para Despachos de Abogados</p>
-  <div class="badge">Demo en vivo - Con triage legal automatico</div>
+</header>
+<div class="nav-overlay" id="navOverlay" onclick="closeNav()"></div>
+
+<!-- ============== HERO ============== -->
+<section class="hero">
+  <div class="wrap">
+    <div class="text">
+      <div class="eyebrow">WhiteMoon Abogados · Madrid</div>
+      <h1>Defendemos sus derechos con <em>experiencia y compromiso</em></h1>
+      <p>Asesoramos a particulares y empresas en derecho civil, laboral, penal, mercantil, familiar y bancario. Primera consulta gratuita y atención personalizada.</p>
+      <div class="btns">
+        <a href="#" class="btn-primary" onclick="toggleChat();return false">Solicite consulta gratuita</a>
+        <a href="#areas" class="btn-ghost">Conozca nuestras áreas</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1400&q=80" alt="Despacho de WhiteMoon Abogados" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&q=80'">
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stats-grid">
+    <div class="stat"><div class="num">25<span>+</span></div><div class="lbl">AÑOS DE EXPERIENCIA</div></div>
+    <div class="stat"><div class="num">2.000<span>+</span></div><div class="lbl">CASOS RESUELTOS</div></div>
+    <div class="stat"><div class="num">92<span>%</span></div><div class="lbl">DE ÉXITO EN JUICIO</div></div>
+  </div>
 </div>
-<div class="chat-container">
-  <div class="chat-head">
-    <div class="chat-head-info">
-      <img src="data:image/jpeg;base64,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" style="width:42px;height:42px;border-radius:12px;object-fit:cover">
-      <div>
-        <div class="chat-head-name">Asistente Legal IA</div>
-        <div class="chat-head-sub">En linea - Atencion 24h</div>
+
+<!-- ============== ÁREAS ============== -->
+<section class="section" id="areas">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Especialidades</div>
+      <h2>Áreas de práctica</h2>
+      <p>Equipo multidisciplinar con abogados especializados en cada rama del derecho.</p>
+    </div>
+    <div class="areas">
+      <div class="area-card">
+        <div class="area-img"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=500&q=80" alt="Derecho civil" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&q=80'"></div>
+        <div class="area-body"><div class="area-icon">⚖️</div><h3>Civil</h3><p>Contratos civiles, reclamaciones de cantidad, responsabilidad y obligaciones.</p></div>
+      </div>
+      <div class="area-card">
+        <div class="area-img"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=500&q=80" alt="Derecho laboral" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&q=80'"></div>
+        <div class="area-body"><div class="area-icon">💼</div><h3>Laboral</h3><p>Despidos improcedentes, ERTEs, reclamaciones salariales y accidentes laborales.</p></div>
+      </div>
+      <div class="area-card">
+        <div class="area-img"><img src="https://images.unsplash.com/photo-1575505586569-646b2ca898fc?w=500&q=80" alt="Derecho penal" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&q=80'"></div>
+        <div class="area-body"><div class="area-icon">👤</div><h3>Penal</h3><p>Defensa penal, asistencia al detenido 24h, recursos y representación de víctimas.</p></div>
+      </div>
+      <div class="area-card">
+        <div class="area-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" alt="Derecho de familia" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&q=80'"></div>
+        <div class="area-body"><div class="area-icon">👨‍👩‍👧</div><h3>Familia</h3><p>Divorcios, custodias, pensiones, herencias y testamentos.</p></div>
+      </div>
+      <div class="area-card">
+        <div class="area-img"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&q=80" alt="Derecho mercantil" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&q=80'"></div>
+        <div class="area-body"><div class="area-icon">🏢</div><h3>Mercantil</h3><p>Constitución de sociedades, contratos mercantiles, concursal y asesoramiento empresarial.</p></div>
+      </div>
+      <div class="area-card">
+        <div class="area-img"><img src="https://images.unsplash.com/photo-1568607689150-17e625c1586e?w=500&q=80" alt="Derecho bancario" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&q=80'"></div>
+        <div class="area-body"><div class="area-icon">🏦</div><h3>Bancario</h3><p>Cláusulas suelo, tarjetas revolving, microcréditos abusivos y gastos hipotecarios.</p></div>
       </div>
     </div>
   </div>
-  <div class="chat-msgs" id="msgs">
-    <div class="msg bot">Buenos dias. Bienvenido/a al despacho.
+</section>
 
-Soy el asistente legal virtual. Puedo orientarle y derivarle al abogado mas adecuado segun su consulta.
-
-Que tipo de asunto necesita tratar?</div>
-    <div class="quick-btns" id="initBtns">
-      <button class="quick-btn" style="background:linear-gradient(135deg,#1a2b4a,#2c4570);color:#fff;font-size:.82rem;padding:9px 20px;border:1px solid #c9a868" onclick="pickArea(this)">Consulta urgente</button>
-      <button class="quick-btn" onclick="pickArea(this)">Derecho Penal</button>
-      <button class="quick-btn" onclick="pickArea(this)">Derecho Laboral</button>
-      <button class="quick-btn" onclick="pickArea(this)">Derecho Civil</button>
-      <button class="quick-btn" onclick="pickArea(this)">Derecho de Familia</button>
-      <button class="quick-btn" onclick="pickArea(this)">Derecho Mercantil</button>
-      <button class="quick-btn" onclick="pickArea(this)">Derecho Bancario</button>
-      <button class="quick-btn" onclick="pickArea(this)">Revolving / Microcreditos</button>
-      <button class="quick-btn" onclick="pickArea(this)">Desahucios</button>
-      <button class="quick-btn" onclick="pickArea(this)">Herencias y Testamentos</button>
-      <button class="quick-btn" onclick="pickArea(this)">Extranjeria</button>
-      <button class="quick-btn" onclick="pickArea(this)">Otro tema</button>
+<!-- ============== EQUIPO ============== -->
+<section class="section team-section" id="equipo">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Nuestro equipo</div>
+      <h2>Abogados a su servicio</h2>
+      <p>Profesionales colegiados con trayectoria probada y compromiso con cada caso.</p>
+    </div>
+    <div class="team">
+      <div class="team-card">
+        <div class="team-photo"><img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=300&q=80" alt="Dña. Lucía Vargas" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&q=80'"></div>
+        <h4>Dña. Lucía Vargas</h4><div class="role">Civil y Familia</div><div class="col">Colegiada nº 12.847 · ICAM</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" alt="D. Carlos Méndez" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&q=80'"></div>
+        <h4>D. Carlos Méndez</h4><div class="role">Laboral y Bancario</div><div class="col">Colegiado nº 9.214 · ICAM</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&q=80" alt="Dña. Patricia Soto" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&q=80'"></div>
+        <h4>Dña. Patricia Soto</h4><div class="role">Penal · Asistencia 24h</div><div class="col">Colegiada nº 14.503 · ICAM</div>
+      </div>
     </div>
   </div>
+</section>
+
+<!-- ============== GALERÍA ============== -->
+<section class="section" id="galeria">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Nuestro despacho</div>
+      <h2>Un entorno profesional</h2>
+      <p>Atendemos en instalaciones modernas con plena confidencialidad y comodidad.</p>
+    </div>
+    <div class="gallery">
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&q=80" alt="Despacho legal" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&q=80'"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=500&q=80" alt="Documentos y contratos" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&q=80'"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1568607689150-17e625c1586e?w=500&q=80" alt="Biblioteca legal" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&q=80'"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1575505586569-646b2ca898fc?w=500&q=80" alt="Sala de juzgado" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&q=80'"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&q=80" alt="Sala de reuniones" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&q=80'"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=500&q=80" alt="Reunión de trabajo" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&q=80'"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="site-footer" id="contacto">
+  <div class="wrap">
+    <div>
+      <div class="brand-foot"><div class="crest">⚖️</div>WhiteMoon Abogados</div>
+      <p>Asesoramiento jurídico integral para particulares y empresas. Más de 25 años defendiendo derechos en los tribunales españoles.</p>
+    </div>
+    <div>
+      <h5>Contacto</h5>
+      <p>Calle Justicia, 12<br>28010 Madrid<br>911 234 567<br><a href="mailto:contacto@whitemoon.es">contacto@whitemoon.es</a></p>
+    </div>
+    <div>
+      <h5>Horario</h5>
+      <p>Lunes a viernes: 9:00 — 19:00<br>Sábados: 10:00 — 14:00<br><strong style="color:#c9a868">Asistencia penal 24h</strong></p>
+    </div>
+  </div>
+  <div class="copyright">© 2026 WhiteMoon Abogados — Sitio demostrativo · Powered by <a href="https://whitemoon.es" style="color:#c9a868" target="_blank">Legal WhiteMoon</a></div>
+</footer>
+
+<!-- ============== WIDGET FLOTANTE ============== -->
+<div class="teaser" id="teaser">
+  <span id="teaserText">¿Necesita un abogado? Primera consulta gratis ⚖️</span>
+  <span class="x" onclick="dismissTeaser(event)">✕</span>
+</div>
+
+<button class="fab" id="fab" onclick="toggleChat()" aria-label="Abrir chat de consulta legal — WhiteMoon Abogados" title="WhiteMoon Abogados — Consulta gratuita">⚖️</button>
+
+<div class="chat-window" id="chatWindow">
+  <div class="chat-head">
+    <div class="chat-head-info">
+      <div class="chat-avatar">⚖️</div>
+      <div>
+        <div class="chat-head-name">WhiteMoon Abogados</div>
+        <div class="chat-head-sub">Asistente legal · Online</div>
+      </div>
+    </div>
+    <button class="chat-close" id="chatClose" onclick="toggleChat()" aria-label="Cerrar chat">✕</button>
+  </div>
+  <div class="chat-msgs" id="msgs"></div>
   <div class="chat-input">
     <input type="text" id="input" placeholder="Escriba su mensaje..." onkeydown="if(event.key==='Enter')send()">
-    <button class="send-btn" onclick="send()"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+    <button class="send-btn" onclick="send()" aria-label="Enviar"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
   </div>
-  <div class="chat-footer">Powered by <a href="https://whitemoon.es" target="_blank">WhiteMoon</a> - Agencia de IA</div>
+  <div class="chat-footer">Powered by <a href="https://whitemoon.es" target="_blank">Legal WhiteMoon</a> — Agencia de IA</div>
 </div>
+
 <script>
-var WEBHOOK_URL='https://whitemoonagency.app.n8n.cloud/webhook/chatbot-abogado';
-var state={step:0,area:'',name:'',apellidos:'',tel:'',email:'',descripcion:'',urgencia:'',triage:''};
+var WA_NUMBER='643199580';
+var state={step:0,area:'',name:'',tel:'',descripcion:'',welcomed:false};
 
-function addMsg(text,type){var c=document.getElementById('msgs');var d=document.createElement('div');d.className='msg '+(type||'bot');d.textContent=text;c.appendChild(d);c.scrollTop=c.scrollHeight}
-function addHtml(html){var c=document.getElementById('msgs');var d=document.createElement('div');d.innerHTML=html;c.appendChild(d);c.scrollTop=c.scrollHeight}
-
-// TRIAGE LEGAL AUTOMATICO
-function calcularTriage(area,urgencia,descripcion){
-  var txt=(area+' '+urgencia+' '+descripcion).toLowerCase();
-  // ROJO - Maxima urgencia
-  if(txt.includes('penal')||txt.includes('detenido')||txt.includes('detencion')||
-     txt.includes('juicio manana')||txt.includes('juicio hoy')||txt.includes('urgente')||
-     txt.includes('policia')||txt.includes('guardia civil')){
-    return {nivel:'ROJO',color:'#ef4444',icon:'🔴',prioridad:'URGENTE',tiempo:'menos de 2h',clase:'triage-red'};
-  }
-  // AMARILLO - Urgencia media
-  if(txt.includes('laboral')||txt.includes('despido')||txt.includes('desahucio')||
-     txt.includes('bancario')||txt.includes('revolving')||txt.includes('microcred')){
-    return {nivel:'AMARILLO',color:'#f59e0b',icon:'🟡',prioridad:'Alta',tiempo:'menos de 24h',clase:'triage-yellow'};
-  }
-  // VERDE - Consultas ordinarias
-  return {nivel:'VERDE',color:'#22c55e',icon:'🟢',prioridad:'Normal',tiempo:'48-72h',clase:''};
+// ===== NAV MOBILE =====
+function toggleNav(){
+  var n=document.getElementById('nav');
+  var h=document.getElementById('hamburger');
+  var o=document.getElementById('navOverlay');
+  n.classList.toggle('open');h.classList.toggle('open');o.classList.toggle('show');
+}
+function closeNav(){
+  document.getElementById('nav').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('navOverlay').classList.remove('show');
 }
 
-function pickArea(el){
-  var text=el.textContent.trim();
-  addMsg(text,'user');
-  document.getElementById('initBtns').remove();
-  if(text==='Consulta urgente'){
-    state.step=0.5;
-    state.urgencia='URGENTE';
-    setTimeout(function(){
-      addMsg('Entendido. Sobre que materia necesita asistencia urgente?');
-      setTimeout(function(){
-        addHtml('<div class="quick-btns" id="areaBtns"><button class="quick-btn" onclick="pickAreaLegal(this)">Derecho Penal</button><button class="quick-btn" onclick="pickAreaLegal(this)">Derecho Laboral</button><button class="quick-btn" onclick="pickAreaLegal(this)">Derecho Civil</button><button class="quick-btn" onclick="pickAreaLegal(this)">Derecho de Familia</button><button class="quick-btn" onclick="pickAreaLegal(this)">Desahucios</button><button class="quick-btn" onclick="pickAreaLegal(this)">Detencion policial</button><button class="quick-btn" onclick="pickAreaLegal(this)">Otro</button></div>');
-      },300);
-    },800);
+// ===== CHAT HELPERS =====
+function addMsg(text,type){
+  var c=document.getElementById('msgs');
+  var d=document.createElement('div');
+  d.className='msg '+(type||'bot');d.textContent=text;
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+function addHtml(html){
+  var c=document.getElementById('msgs');
+  var d=document.createElement('div');d.innerHTML=html;
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+function showTyping(){
+  var c=document.getElementById('msgs');
+  var d=document.createElement('div');d.className='typing';d.id='typing';
+  d.innerHTML='<span></span><span></span><span></span>';
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+function hideTyping(){var t=document.getElementById('typing');if(t)t.remove()}
+function botSay(text,delay){
+  delay=delay||700;
+  showTyping();
+  setTimeout(function(){hideTyping();addMsg(text,'bot')},delay);
+}
+function botHtml(html,delay){
+  delay=delay||700;
+  showTyping();
+  setTimeout(function(){hideTyping();addHtml(html)},delay);
+}
+
+// ===== CAPTURA: ocultar FAB / X cuando step >= 1 =====
+function updateCaptureMode(){
+  var fab=document.getElementById('fab');
+  var x=document.getElementById('chatClose');
+  if(state.step>=1 && state.step<3){
+    fab.classList.add('hidden');
+    x.classList.add('hidden');
   } else {
-    state.area=text;state.step=0.8;
-    setTimeout(function(){
-      addMsg('Entendido. '+state.area+'.\n\nPara orientarle correctamente, cuentenos brevemente su situacion o consulta.\n\nNo es necesario dar datos confidenciales aun, solo una descripcion general.');
-    },800);
+    fab.classList.remove('hidden');
+    x.classList.remove('hidden');
   }
 }
 
-function pickAreaLegal(el){
-  state.area=el.textContent.trim();
-  addMsg(el.textContent,'user');
-  var btns=document.getElementById('areaBtns');if(btns)btns.remove();
-  state.step=0.8;
-  setTimeout(function(){
-    addMsg('Perfecto, '+state.area+'.\n\nCuentenos brevemente la situacion. Sin datos confidenciales, solo una descripcion general del asunto.');
-  },800);
+// ===== TOGGLE CHAT =====
+function toggleChat(){
+  var w=document.getElementById('chatWindow');
+  // Bloqueo durante captura intermedia
+  if(w.classList.contains('open') && state.step>=1 && state.step<3) return;
+  w.classList.toggle('open');
+  dismissTeaser();
+  if(w.classList.contains('open')){
+    if(!state.welcomed){
+      state.welcomed=true;
+      setTimeout(welcome,1500);
+    }
+    setTimeout(function(){var i=document.getElementById('input');if(i&&window.innerWidth>600)i.focus()},350);
+  }
 }
 
+function welcome(){
+  addMsg('Bienvenido/a a WhiteMoon Abogados ⚖️\n¿En qué área jurídica podemos ayudarle?','bot');
+  setTimeout(function(){
+    addHtml('<div class="quick-btns" id="initBtns">'+
+      '<button class="quick-btn" onclick="quickAction(this,\'consulta\')">⚖️ Consulta jurídica</button>'+
+      '<button class="quick-btn" onclick="quickAction(this,\'laboral\')">💼 Derecho laboral</button>'+
+      '<button class="quick-btn" onclick="quickAction(this,\'familia\')">👨‍👩‍👧 Derecho de familia</button>'+
+      '<button class="quick-btn" onclick="quickAction(this,\'bancario\')">🏦 Derecho bancario</button>'+
+      '<button class="quick-btn" onclick="quickAction(this,\'gratuita\')">📋 Primera consulta gratuita</button>'+
+    '</div>');
+  },400);
+}
+
+function removeInitBtns(){
+  var b=document.getElementById('initBtns');if(b)b.remove();
+  var b2=document.getElementById('areaBtns');if(b2)b2.remove();
+}
+
+function quickAction(el,key){
+  addMsg(el.textContent,'user');
+  removeInitBtns();
+  if(key==='consulta'||key==='gratuita'){
+    askArea();
+  } else {
+    state.area=mapArea(key);
+    afterAreaChosen();
+  }
+}
+
+function askArea(){
+  botSay('Entendemos su situación ⚖️\n¿En qué área jurídica necesita asesoramiento?',700);
+  setTimeout(function(){
+    botHtml('<div class="quick-btns" id="areaBtns">'+
+      '<button class="quick-btn" onclick="pickArea(this,\'Laboral\')">💼 Laboral (despido, ERTE, nómina)</button>'+
+      '<button class="quick-btn" onclick="pickArea(this,\'Familia\')">👨‍👩‍👧 Familia (divorcio, custodia, herencia)</button>'+
+      '<button class="quick-btn" onclick="pickArea(this,\'Bancario\')">🏦 Bancario (cláusula suelo, revolving)</button>'+
+      '<button class="quick-btn" onclick="pickArea(this,\'Mercantil\')">🏢 Mercantil (empresa, contratos, sociedades)</button>'+
+      '<button class="quick-btn" onclick="pickArea(this,\'Inmobiliario\')">🏠 Inmobiliario (alquiler, compraventa)</button>'+
+      '<button class="quick-btn" onclick="pickArea(this,\'Penal\')">⚖️ Penal (denuncia, defensa)</button>'+
+      '<button class="quick-btn" onclick="pickArea(this,\'Otro\')">📋 Otro / No sé qué área</button>'+
+    '</div>',1500);
+  },1700);
+}
+
+function pickArea(el,area){
+  addMsg(el.textContent,'user');
+  removeInitBtns();
+  state.area=area;
+  afterAreaChosen();
+}
+
+function afterAreaChosen(){
+  state.step=0.8;
+  botSay('Para poder ayudarle correctamente,\n¿puede describirme brevemente su caso?',900);
+}
+
+function mapArea(key){
+  return {laboral:'Laboral',familia:'Familia',bancario:'Bancario',mercantil:'Mercantil',penal:'Penal',inmobiliario:'Inmobiliario'}[key]||'Consulta jurídica';
+}
+
+// ===== KEYWORDS =====
+function matchKeyword(t){
+  t=t.toLowerCase();
+  var groups=[
+    {area:'Laboral',words:['laboral','despido','erte','nomina','nómina','trabajo','empleado','acoso laboral','accidente laboral'],
+     reply:'En derecho laboral le ayudamos con 💼\n→ Despidos improcedentes\n→ Reclamación de cantidades\n→ ERTEs y suspensiones\n→ Accidentes laborales\n→ Acoso laboral\n¿Quiere una consulta gratuita?'},
+    {area:'Familia',words:['divorcio','separacion','separación','custodia','pension','pensión','hijo','familia','herencia','testamento','adopcion','adopción'],
+     reply:'En derecho de familia tratamos 👨‍👩‍👧\n→ Divorcios y separaciones\n→ Custodia y régimen de visitas\n→ Pensiones alimenticias\n→ Herencias y testamentos\n→ Adopciones\n¿Quiere que valoremos su caso?'},
+    {area:'Bancario',words:['bancario','banco','clausula','cláusula','hipoteca','revolving','tarjeta','prestamo','préstamo','microcredito','microcrédito','usura'],
+     reply:'En derecho bancario recuperamos 🏦\n→ Cláusulas suelo\n→ Tarjetas revolving\n→ Préstamos abusivos\n→ Gastos hipotecarios\n→ Microcréditos usurarios\nMuchos clientes recuperan miles de euros.\n¿Quiere saber si tiene caso?',urgent:true},
+    {area:'Mercantil',words:['mercantil','empresa','sociedad','autonomo','autónomo','negocio','contrato mercantil'],
+     reply:'En derecho mercantil asesoramos 🏢\n→ Constitución de sociedades\n→ Contratos mercantiles\n→ Fusiones y adquisiciones\n→ Concursos de acreedores\n→ Propiedad intelectual\n¿Tiene una consulta concreta?'},
+    {area:'Penal',words:['penal','denuncia','querella','delito','detenido','acusado','victima','víctima'],
+     reply:'En derecho penal le defendemos ⚖️\n→ Defensa penal\n→ Representación de víctimas\n→ Recursos y apelaciones\n→ Atenuantes y eximentes\nEste tipo de casos requieren\natención urgente.\n¿Puedo ponerle en contacto ahora mismo?',urgent:true}
+  ];
+  for(var i=0;i<groups.length;i++){
+    var g=groups[i];
+    for(var j=0;j<g.words.length;j++){
+      if(t.indexOf(g.words[j])!==-1) return g;
+    }
+  }
+  if(/(precio|honorarios|cuanto|cuánto|coste|presupuesto|pago)/.test(t)){
+    return {area:'Consulta',reply:'Nuestros honorarios dependen\ndel tipo de caso y complejidad 💰\nPrimera consulta: GRATUITA (30 min)\nTrabajamos también a éxito en\ndeterminados casos.\n¿Le agendamos la consulta gratuita?'};
+  }
+  if(/(urgente|urgencia|hoy|ahora|inmediato)/.test(t)){
+    return {area:'Urgente',reply:'Entendemos la urgencia ⚡\nAtendemos casos urgentes el mismo día.\n¿Me da su teléfono para llamarle\nen los próximos minutos?',urgentDirect:true};
+  }
+  if(/(consulta|abogado|legal|juridico|jurídico|problema|caso|ayuda|necesito|quiero)/.test(t)){
+    return {area:'',reply:'',askArea:true};
+  }
+  return null;
+}
+
+// ===== BUILD WHATSAPP =====
+function buildWaMessage(){
+  return '⚖️ *CONSULTA — WhiteMoon Abogados*\n\n'+
+         '👤 *Nombre:* '+state.name+'\n'+
+         '📞 *Tel:* +34'+state.tel+'\n'+
+         '📁 *Área:* '+(state.area||'Consulta jurídica')+'\n'+
+         '📝 *Caso:* '+(state.descripcion||'(sin descripción)')+'\n\n'+
+         '_Vía chatbot WhiteMoon · whitemoon.es_';
+}
+
+// ===== TEASER =====
+function showTeaser(){
+  if(sessionStorage.getItem('wm_teaser_dismissed'))return;
+  if(document.getElementById('chatWindow').classList.contains('open'))return;
+  var t=document.getElementById('teaser');
+  var txt=document.getElementById('teaserText');
+  txt.textContent=window.innerWidth<=600?'¿Necesita un abogado? ⚖️':'¿Necesita un abogado? Primera consulta gratis ⚖️';
+  t.style.display='flex';
+}
+function dismissTeaser(e){
+  if(e){e.stopPropagation()}
+  var t=document.getElementById('teaser');
+  if(t)t.style.display='none';
+  sessionStorage.setItem('wm_teaser_dismissed','1');
+}
+setTimeout(showTeaser,5000);
+window.addEventListener('scroll',function(){var t=document.getElementById('teaser');if(t&&t.style.display==='flex')dismissTeaser()},{passive:true});
+
+// ===== SEND =====
 function send(){
   var inp=document.getElementById('input');var m=inp.value.trim();if(!m)return;inp.value='';
   addMsg(m,'user');
-  if(state.step===0){state.area=m;state.step=0.8;setTimeout(function(){addMsg('Entendido. Cuentenos brevemente su situacion o consulta.')},800)}
-  else if(state.step===0.5){state.area=m;state.step=0.8;setTimeout(function(){addMsg('Entendido. Cuentenos brevemente su situacion.')},800)}
-  else if(state.step===0.8){
+  removeInitBtns();
+
+  // Captura cualificación
+  if(state.step===0.8){
     state.descripcion=m;
-    // Calcular triage
-    state.triage=calcularTriage(state.area,state.urgencia,state.descripcion);
     state.step=1;
-    setTimeout(function(){
-      addHtml('<div class="triage-info">'+state.triage.icon+' <strong>Clasificacion: '+state.triage.prioridad+'</strong><br>Tiempo estimado de respuesta: '+state.triage.tiempo+'</div>');
-      setTimeout(function(){
-        addMsg('Gracias por la informacion.\n\nPara que el abogado pueda contactarle, necesito algunos datos.\n\nCual es su nombre?');
-      },400);
-    },800)
+    updateCaptureMode();
+    botSay('Gracias por la información.\nOfrecemos primera consulta gratuita\nde 30 minutos para valorar su caso 📋\n\n¿Me facilita su nombre?',900);
+    return;
   }
-  else if(state.step===1){state.name=m;state.step=2;setTimeout(function(){addMsg('Gracias, '+state.name+'. Y sus apellidos?')},800)}
-  else if(state.step===2){state.apellidos=m;state.step=3;setTimeout(function(){addMsg('Perfecto, '+state.name+' '+state.apellidos+'. Me facilita un telefono de contacto?')},800)}
-  else if(state.step===3){state.tel=m;state.step=4;setTimeout(function(){addMsg('Gracias. Para enviarle documentacion, cual es su email?')},800)}
-  else if(state.step===4){
-    state.email=m;state.step=99;
-    setTimeout(function(){
-      addMsg('Perfecto, '+state.name+'. He registrado su consulta:\n\n- Nombre: '+state.name+' '+state.apellidos+'\n- Telefono: '+state.tel+'\n- Email: '+state.email+'\n- Area: '+state.area+'\n- Prioridad: '+state.triage.prioridad+'\n\nEnviando al despacho...');
-      setTimeout(function(){
-        var clean=function(s){return s.replace(/[^\x20-\x7E\xA0-\xFF]/g,'').trim()};
-        var datos={
-          nombre:clean(state.name),
-          apellidos:clean(state.apellidos),
-          telefono:clean(state.tel),
-          email:clean(state.email),
-          area_legal:clean(state.area),
-          descripcion:clean(state.descripcion),
-          urgencia:clean(state.urgencia),
-          nivel_triage:state.triage.nivel
-        };
-        if(WEBHOOK_URL){
-          var ifr=document.createElement('iframe');ifr.style.display='none';
-          ifr.src=WEBHOOK_URL+'?nombre='+encodeURIComponent(datos.nombre)+'&apellidos='+encodeURIComponent(datos.apellidos)+'&telefono='+encodeURIComponent(datos.telefono)+'&email='+encodeURIComponent(datos.email)+'&area_legal='+encodeURIComponent(datos.area_legal)+'&descripcion='+encodeURIComponent(datos.descripcion)+'&urgencia='+encodeURIComponent(datos.urgencia);
-          document.body.appendChild(ifr);setTimeout(function(){ifr.remove()},5000);
-        }
-        var confirmMsg='';
-        var confirmClass=state.triage.clase;
-        if(state.triage.nivel==='ROJO'){
-          confirmMsg='<div class="wa-confirm '+confirmClass+'"><div class="wa-icon">🔴</div><div class="wa-title">Consulta URGENTE registrada</div><div class="wa-text">Su caso ha sido clasificado como <strong>'+state.triage.prioridad+'</strong>.<br><br>Un abogado especialista le contactara en <strong>menos de 2 horas</strong>.<br><br>Si se trata de una detencion en curso, llame directamente al despacho.</div></div>';
-        } else if(state.triage.nivel==='AMARILLO'){
-          confirmMsg='<div class="wa-confirm '+confirmClass+'"><div class="wa-icon">🟡</div><div class="wa-title">Consulta registrada - Prioridad Alta</div><div class="wa-text">Su consulta ha sido clasificada como <strong>'+state.triage.prioridad+'</strong>.<br><br>Un abogado especialista en <strong>'+state.area+'</strong> le contactara en <strong>menos de 24 horas</strong>.<br><br>Gracias por confiar en nosotros.</div></div>';
-        } else {
-          confirmMsg='<div class="wa-confirm"><div class="wa-icon">✅</div><div class="wa-title">Consulta registrada correctamente</div><div class="wa-text">Su consulta sobre <strong>'+state.area+'</strong> ha sido registrada.<br><br>Un abogado le contactara en un plazo de <strong>48-72 horas</strong>.<br><br>Gracias por confiar en el despacho.</div></div>';
-        }
-        addHtml(confirmMsg);
-        addHtml('<div class="disclaimer"><strong>Aviso legal:</strong> Esta conversacion no constituye asesoramiento juridico. Toda consulta profesional sera atendida por un abogado colegiado. Sus datos seran tratados segun nuestra politica de privacidad (RGPD).</div>');
-        addMsg('Si necesita algo mas, estoy aqui para ayudarle. Buen dia.');
-      },1500);
-    },1000);
+  if(state.step===1){
+    state.name=m;state.step=2;
+    botSay('Gracias, '+state.name+'.\n¿Me facilita un teléfono de contacto?',800);
+    return;
   }
-  else if(state.step===99){setTimeout(function(){addMsg('Su consulta ya esta registrada. Un abogado le contactara segun la prioridad asignada. Gracias.')},800)}
+  if(state.step===2){
+    state.tel=m.replace(/[^0-9]/g,'');state.step=3;
+    updateCaptureMode();
+    setTimeout(function(){
+      addMsg('Perfecto, '+state.name+'. He registrado su consulta:\n\n• Nombre: '+state.name+'\n• Teléfono: +34'+state.tel+'\n• Área: '+(state.area||'Consulta jurídica')+'\n• Caso: '+state.descripcion,'bot');
+      setTimeout(function(){
+        addHtml('<div class="wa-confirm"><div class="wa-icon">✅</div><div class="wa-title">Consulta registrada correctamente</div><div class="wa-text">Su consulta sobre <strong>'+(state.area||'asesoramiento jurídico')+'</strong> ha sido registrada.<br><br>Un abogado de <strong>WhiteMoon Abogados</strong> le contactará para concertar la <strong>primera consulta gratuita de 30 minutos</strong>.</div></div>');
+        addHtml('<div class="disclaimer"><strong>Aviso legal:</strong> Esta conversación no constituye asesoramiento jurídico. Toda consulta profesional será atendida por un abogado colegiado. Sus datos serán tratados según RGPD.</div>');
+        var waUrl='https://wa.me/34'+WA_NUMBER+'?text='+encodeURIComponent(buildWaMessage());
+        addHtml('<a href="'+waUrl+'" target="_blank" rel="noopener" class="wa-btn"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/></svg> Avisar por WhatsApp</a>');
+        addMsg('Si necesita algo más, estoy aquí para ayudarle.','bot');
+      },1200);
+    },800);
+    return;
+  }
+  if(state.step===3){
+    botSay('Su consulta ya está registrada. Un abogado de WhiteMoon Abogados le contactará a la mayor brevedad.',700);
+    return;
+  }
+
+  // Step 0: matching por keywords
+  var match=matchKeyword(m);
+  if(match){
+    if(match.askArea){askArea();return}
+    if(match.area)state.area=match.area;
+    if(match.urgentDirect){
+      botSay(match.reply,700);
+      setTimeout(function(){state.step=1;updateCaptureMode();botSay('¿Me facilita su nombre?',900)},1800);
+      return;
+    }
+    botSay(match.reply,700);
+    setTimeout(function(){
+      botSay('Para poder ayudarle correctamente,\n¿puede describirme brevemente su caso?',900);
+      state.step=0.8;
+    },1800);
+    return;
+  }
+  // Fallback
+  botSay('Estoy aquí para ayudarle ⚖️\n¿En qué área jurídica necesita\nasesoramiento o quiere concertar\nuna consulta gratuita?',700);
+  setTimeout(askArea,1700);
 }
 </script>
 </body>
