@@ -394,7 +394,7 @@ img{max-width:100%;display:block}
 
 <script>
 var WA_NUMBER='643199580';
-var state={step:0,area:'',name:'',tel:'',descripcion:'',welcomed:false};
+var state={step:0,area:'',name:'',tel:'',descripcion:'',welcomed:false,micro:false,empresa:'',intereses:''};
 
 // ===== NAV MOBILE =====
 function toggleNav(){
@@ -476,25 +476,87 @@ function welcome(){
       '<button class="quick-btn" onclick="quickAction(this,\'laboral\')">💼 Derecho laboral</button>'+
       '<button class="quick-btn" onclick="quickAction(this,\'familia\')">👨‍👩‍👧 Derecho de familia</button>'+
       '<button class="quick-btn" onclick="quickAction(this,\'bancario\')">🏦 Derecho bancario</button>'+
+      '<button class="quick-btn" style="background:linear-gradient(135deg,#1a2b4a,#2c4570);color:#fff;border:1px solid #c9a868" onclick="quickAction(this,\'micro\')">🚨 Microcrédito abusivo</button>'+
       '<button class="quick-btn" onclick="quickAction(this,\'gratuita\')">📋 Primera consulta gratuita</button>'+
     '</div>');
   },400);
 }
 
 function removeInitBtns(){
-  var b=document.getElementById('initBtns');if(b)b.remove();
-  var b2=document.getElementById('areaBtns');if(b2)b2.remove();
+  ['initBtns','areaBtns','microStatusBtns','microCompanyBtns','microAmountBtns'].forEach(function(id){
+    var b=document.getElementById(id);if(b)b.remove();
+  });
 }
 
 function quickAction(el,key){
   addMsg(el.textContent,'user');
   removeInitBtns();
-  if(key==='consulta'||key==='gratuita'){
+  if(key==='micro'){
+    startMicroFlow();
+  } else if(key==='consulta'||key==='gratuita'){
     askArea();
   } else {
     state.area=mapArea(key);
     afterAreaChosen();
   }
+}
+
+// ===== FLUJO MICROCRÉDITOS =====
+function removeMicroBtns(){
+  ['microStatusBtns','microCompanyBtns','microAmountBtns'].forEach(function(id){
+    var b=document.getElementById(id);if(b)b.remove();
+  });
+}
+function startMicroFlow(){
+  state.micro=true;
+  state.area='Microcrédito usurario';
+  botSay('Este es un caso que TIENE solución legal ⚡\n\nLos microcréditos de Vivus, MoneyMan,\nCashper, MyKredit y similares tienen\nTAEs de hasta 3.000% — la ley los\nconsidera USURA y son reclamables.\n\nMuchos clientes consiguen:\n✅ Anulación total del préstamo\n✅ Devolución de intereses pagados\n✅ Sin coste si no hay resultado\n\n¿Tiene alguno de estos préstamos activos\no ya pagados en los últimos 5 años?',900);
+  setTimeout(function(){
+    botHtml('<div class="quick-btns" id="microStatusBtns">'+
+      '<button class="quick-btn" onclick="pickMicroStatus(this,\'activo\')">💳 Sí, tengo uno activo</button>'+
+      '<button class="quick-btn" onclick="pickMicroStatus(this,\'pagado\')">💳 Sí, ya lo pagué</button>'+
+      '<button class="quick-btn" onclick="pickMicroStatus(this,\'varios\')">💳 Tengo varios</button>'+
+      '<button class="quick-btn" onclick="pickMicroStatus(this,\'duda\')">❓ No estoy seguro</button>'+
+    '</div>',1800);
+  },2000);
+}
+function pickMicroStatus(el){
+  addMsg(el.textContent,'user');
+  removeMicroBtns();
+  state.descripcion='Microcrédito — '+el.textContent.replace(/^[^a-zA-Z]+/,'');
+  botSay('Perfecto, tiene muchas probabilidades\nde recuperar su dinero ⚖️\n\nPara valorar su caso necesito:\n¿Con qué empresa/s tiene el préstamo?',900);
+  setTimeout(function(){
+    botHtml('<div class="quick-btns" id="microCompanyBtns">'+
+      '<button class="quick-btn" onclick="pickMicroCompany(this,\'Vivus\')">Vivus</button>'+
+      '<button class="quick-btn" onclick="pickMicroCompany(this,\'MoneyMan\')">MoneyMan</button>'+
+      '<button class="quick-btn" onclick="pickMicroCompany(this,\'Cashper\')">Cashper</button>'+
+      '<button class="quick-btn" onclick="pickMicroCompany(this,\'MyKredit\')">MyKredit</button>'+
+      '<button class="quick-btn" onclick="pickMicroCompany(this,\'Creditea\')">Creditea</button>'+
+      '<button class="quick-btn" onclick="pickMicroCompany(this,\'Otra / Varias\')">Otra / Varias</button>'+
+    '</div>',1500);
+  },1700);
+}
+function pickMicroCompany(el,empresa){
+  addMsg(el.textContent,'user');
+  removeMicroBtns();
+  state.empresa=empresa;
+  botSay('¿Cuánto pagó aproximadamente\nen intereses?',800);
+  setTimeout(function(){
+    botHtml('<div class="quick-btns" id="microAmountBtns">'+
+      '<button class="quick-btn" onclick="pickMicroAmount(this,\'Menos de 500€\')">Menos de 500€</button>'+
+      '<button class="quick-btn" onclick="pickMicroAmount(this,\'500€ - 1.500€\')">500€ - 1.500€</button>'+
+      '<button class="quick-btn" onclick="pickMicroAmount(this,\'1.500€ - 3.000€\')">1.500€ - 3.000€</button>'+
+      '<button class="quick-btn" onclick="pickMicroAmount(this,\'Más de 3.000€\')">Más de 3.000€</button>'+
+    '</div>',1300);
+  },1500);
+}
+function pickMicroAmount(el,cantidad){
+  addMsg(el.textContent,'user');
+  removeMicroBtns();
+  state.intereses=cantidad;
+  state.step=1;
+  updateCaptureMode();
+  botSay('Con esos datos su caso es viable 💪\nNuestro equipo le llamará HOY para\niniciar la reclamación.\n¿Me dice su nombre?',900);
 }
 
 function askArea(){
@@ -531,6 +593,11 @@ function mapArea(key){
 // ===== KEYWORDS =====
 function matchKeyword(t){
   t=t.toLowerCase();
+  // MICROCRÉDITOS — prioridad máxima, dispara flujo dedicado
+  var microWords=['microcredito','microcrédito','vivus','moneyman','cashper','mykredit','creditea','ferratum','wandoo','prestamo rapido','préstamo rápido','prestamo online','préstamo online','intereses','usura','tae','prestamista'];
+  for(var k=0;k<microWords.length;k++){
+    if(t.indexOf(microWords[k])!==-1) return {micro:true};
+  }
   var groups=[
     {area:'Laboral',words:['laboral','despido','erte','nomina','nómina','trabajo','empleado','acoso laboral','accidente laboral'],
      reply:'En derecho laboral le ayudamos con 💼\n→ Despidos improcedentes\n→ Reclamación de cantidades\n→ ERTEs y suspensiones\n→ Accidentes laborales\n→ Acoso laboral\n¿Quiere una consulta gratuita?'},
@@ -563,6 +630,15 @@ function matchKeyword(t){
 
 // ===== BUILD WHATSAPP =====
 function buildWaMessage(){
+  if(state.micro){
+    return '🚨 *URGENTE — Microcrédito Usurario*\n*WhiteMoon Abogados*\n\n'+
+           '👤 *Nombre:* '+state.name+'\n'+
+           '📞 *Tel:* +34'+state.tel+'\n'+
+           '🏦 *Empresa:* '+(state.empresa||'(no indicada)')+'\n'+
+           '💰 *Intereses pagados:* '+(state.intereses||'(no indicado)')+'\n\n'+
+           '⚡ LLAMAR HOY\n\n'+
+           '_Vía chatbot WhiteMoon · whitemoon.es_';
+  }
   return '⚖️ *CONSULTA — WhiteMoon Abogados*\n\n'+
          '👤 *Nombre:* '+state.name+'\n'+
          '📞 *Tel:* +34'+state.tel+'\n'+
@@ -612,9 +688,16 @@ function send(){
     state.tel=m.replace(/[^0-9]/g,'');state.step=3;
     updateCaptureMode();
     setTimeout(function(){
-      addMsg('Perfecto, '+state.name+'. He registrado su consulta:\n\n• Nombre: '+state.name+'\n• Teléfono: +34'+state.tel+'\n• Área: '+(state.area||'Consulta jurídica')+'\n• Caso: '+state.descripcion,'bot');
+      var resumen=state.micro
+        ? 'Perfecto, '+state.name+'. He registrado su caso URGENTE:\n\n• Nombre: '+state.name+'\n• Teléfono: +34'+state.tel+'\n• Empresa: '+state.empresa+'\n• Intereses pagados: '+state.intereses
+        : 'Perfecto, '+state.name+'. He registrado su consulta:\n\n• Nombre: '+state.name+'\n• Teléfono: +34'+state.tel+'\n• Área: '+(state.area||'Consulta jurídica')+'\n• Caso: '+state.descripcion;
+      addMsg(resumen,'bot');
       setTimeout(function(){
-        addHtml('<div class="wa-confirm"><div class="wa-icon">✅</div><div class="wa-title">Consulta registrada correctamente</div><div class="wa-text">Su consulta sobre <strong>'+(state.area||'asesoramiento jurídico')+'</strong> ha sido registrada.<br><br>Un abogado de <strong>WhiteMoon Abogados</strong> le contactará para concertar la <strong>primera consulta gratuita de 30 minutos</strong>.</div></div>');
+        if(state.micro){
+          addHtml('<div class="wa-confirm" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3)"><div class="wa-icon">🚨</div><div class="wa-title" style="color:#ef4444">Caso URGENTE registrado</div><div class="wa-text">Su reclamación contra <strong>'+state.empresa+'</strong> ha sido registrada como <strong style="color:#fca5a5">URGENTE</strong>.<br><br>El equipo de <strong>WhiteMoon Abogados</strong> le llamará <strong>HOY</strong> para iniciar la reclamación.<br><br>Sin coste si no hay resultado.</div></div>');
+        } else {
+          addHtml('<div class="wa-confirm"><div class="wa-icon">✅</div><div class="wa-title">Consulta registrada correctamente</div><div class="wa-text">Su consulta sobre <strong>'+(state.area||'asesoramiento jurídico')+'</strong> ha sido registrada.<br><br>Un abogado de <strong>WhiteMoon Abogados</strong> le contactará para concertar la <strong>primera consulta gratuita de 30 minutos</strong>.</div></div>');
+        }
         addHtml('<div class="disclaimer"><strong>Aviso legal:</strong> Esta conversación no constituye asesoramiento jurídico. Toda consulta profesional será atendida por un abogado colegiado. Sus datos serán tratados según RGPD.</div>');
         var waUrl='https://wa.me/34'+WA_NUMBER+'?text='+encodeURIComponent(buildWaMessage());
         addHtml('<a href="'+waUrl+'" target="_blank" rel="noopener" class="wa-btn"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/></svg> Avisar por WhatsApp</a>');
@@ -631,6 +714,7 @@ function send(){
   // Step 0: matching por keywords
   var match=matchKeyword(m);
   if(match){
+    if(match.micro){startMicroFlow();return}
     if(match.askArea){askArea();return}
     if(match.area)state.area=match.area;
     if(match.urgentDirect){
