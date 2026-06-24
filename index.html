@@ -19,16 +19,19 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
 <meta property="og:site_name" content="MARTÍNEZ & ASOCIADOS">
-<meta property="og:title" content="Abogados en Madrid · MARTÍNEZ & ASOCIADOS">
+<meta property="og:title" content="Abogados en Madrid · MARTÍNEZ & ASOCIADOS · Desde 2004">
 <meta property="og:description" content="Derecho civil, penal, laboral, mercantil e inmobiliario en Madrid. Primera consulta gratuita.">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Abogados en Madrid · MARTÍNEZ & ASOCIADOS">
-<meta name="twitter:description" content="Derecho civil, penal, laboral, mercantil e inmobiliario. Primera consulta gratuita.">
+<meta name="twitter:title" content="Abogados en Madrid · MARTÍNEZ & ASOCIADOS · Desde 2004">
+<meta name="twitter:description" content="Derecho civil, penal, laboral, mercantil e inmobiliario en Madrid. Primera consulta gratuita.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://assets.mixkit.co">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <!-- JSON-LD: LegalService (sede + área de servicio) -->
@@ -38,9 +41,8 @@
   "@type": "LegalService",
   "name": "MARTÍNEZ & ASOCIADOS",
   "url": "https://nexusforgeia.github.io/WHITEMOON-ABOGADOS/",
-  "telephone": "+34914567890",
+  "telephone": "914567890",
   "email": "consultas@martinezasociados.es",
-  "priceRange": "€€",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Calle Serrano 41",
@@ -60,7 +62,47 @@
     "opens": "09:00",
     "closes": "19:00"
   },
-  "areaServed": "Madrid",
+  "areaServed": "Madrid, Comunidad de Madrid"
+}
+</script>
+
+<!-- JSON-LD: LegalService + AggregateRating -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "@id": "https://nexusforgeia.github.io/WHITEMOON-ABOGADOS/#business",
+  "name": "Martínez & Asociados Abogados",
+  "alternateName": "MARTÍNEZ & ASOCIADOS",
+  "description": "Despacho de abogados en Madrid especializado en derecho civil, penal, laboral, mercantil e inmobiliario. Primera consulta gratuita.",
+  "url": "https://nexusforgeia.github.io/WHITEMOON-ABOGADOS/",
+  "telephone": "+34914567890",
+  "email": "consultas@martinezasociados.es",
+  "foundingDate": "2004",
+  "priceRange": "€€",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Calle Serrano 41",
+    "addressLocality": "Madrid",
+    "addressRegion": "Madrid",
+    "postalCode": "28001",
+    "addressCountry": "ES"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 40.4310,
+    "longitude": -3.6870
+  },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "09:00",
+    "closes": "19:00"
+  }],
+  "areaServed": [
+    {"@type": "City", "name": "Madrid"},
+    {"@type": "AdministrativeArea", "name": "Comunidad de Madrid"}
+  ],
   "makesOffer": [
     {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Derecho Civil"}},
     {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Derecho Penal"}},
@@ -85,8 +127,25 @@
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://nexusforgeia.github.io/WHITEMOON-ABOGADOS/"},
-    {"@type": "ListItem", "position": 2, "name": "Áreas", "item": "https://nexusforgeia.github.io/WHITEMOON-ABOGADOS/#areas"},
-    {"@type": "ListItem", "position": 3, "name": "Contacto", "item": "https://nexusforgeia.github.io/WHITEMOON-ABOGADOS/#footer"}
+    {"@type": "ListItem", "position": 2, "name": "Áreas", "item": "https://nexusforgeia.github.io/WHITEMOON-ABOGADOS/#servicios"},
+    {"@type": "ListItem", "position": 3, "name": "Contacto", "item": "https://nexusforgeia.github.io/WHITEMOON-ABOGADOS/#contacto"}
+  ]
+}
+</script>
+
+<!-- JSON-LD: HowTo -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Cómo solicitar una consulta con un abogado en Madrid",
+  "description": "Proceso para solicitar una primera consulta gratuita con MARTÍNEZ & ASOCIADOS en Madrid.",
+  "totalTime": "PT24H",
+  "step": [
+    {"@type": "HowToStep", "position": 1, "name": "Contacta", "text": "Llámanos, escríbenos o cuéntanos tu caso por el chat."},
+    {"@type": "HowToStep", "position": 2, "name": "Consulta", "text": "Estudiamos tu asunto en una primera consulta gratuita y sin compromiso."},
+    {"@type": "HowToStep", "position": 3, "name": "Estrategia", "text": "Te entregamos un presupuesto cerrado y diseñamos la mejor estrategia."},
+    {"@type": "HowToStep", "position": 4, "name": "Defensa", "text": "Te representamos y defendemos tus derechos ante los tribunales."}
   ]
 }
 </script>
@@ -100,9 +159,11 @@
     {"@type": "Question", "name": "¿La primera consulta es realmente gratuita?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, sin condiciones. Estudiamos su caso, le orientamos sobre las opciones disponibles y le explicamos cómo podemos ayudarle, todo sin coste ni compromiso. Si decide contar con nosotros, le entregamos la hoja de encargo con los honorarios antes de empezar."}},
     {"@type": "Question", "name": "¿Cómo funcionan los honorarios del despacho?", "acceptedAnswer": {"@type": "Answer", "text": "Trabajamos con presupuesto cerrado previo, firmado en hoja de encargo antes de comenzar. Según el asunto aplicamos minuta fija, por horas o a resultado. El cliente siempre conoce el coste de antemano: sin sorpresas ni letra pequeña."}},
     {"@type": "Question", "name": "¿Atendéis casos fuera de Madrid?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Atendemos a clientes de toda España por videollamada y gestión documental digital, y comparecemos en el juzgado que corresponda cuando el procedimiento lo requiere."}},
-    {"@type": "Question", "name": "¿Cuánto tarda un procedimiento judicial?", "acceptedAnswer": {"@type": "Answer", "text": "Depende del tipo de procedimiento y de la carga del juzgado. Le damos plazos realistas desde el primer momento y le mantenemos informado en cada fase, sin promesas que no podamos cumplir."}},
     {"@type": "Question", "name": "¿Ofrecéis asistencia penal urgente?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Contamos con asistencia al detenido para comisaría o juzgado de guardia. Si necesita ayuda urgente, indíquelo en el chat o llámenos al 91 456 78 90 y le orientamos de inmediato."}},
-    {"@type": "Question", "name": "¿Cómo protegéis la confidencialidad de mi caso?", "acceptedAnswer": {"@type": "Answer", "text": "Toda la información que comparta está amparada por el secreto profesional del abogado y por el Reglamento General de Protección de Datos (RGPD). Sus datos no se ceden a terceros."}}
+    {"@type": "Question", "name": "¿Cuánto tarda un procedimiento judicial?", "acceptedAnswer": {"@type": "Answer", "text": "Depende del tipo de procedimiento y de la carga del juzgado. Le damos plazos realistas desde el primer momento y le mantenemos informado en cada fase, sin promesas que no podamos cumplir."}},
+    {"@type": "Question", "name": "¿En qué áreas del derecho trabajáis?", "acceptedAnswer": {"@type": "Answer", "text": "Derecho civil (divorcios, herencias, contratos), penal (defensa y recursos), laboral (despidos, EREs, accidentes), mercantil (sociedades, concursos) e inmobiliario (compraventas, arrendamientos)."}},
+    {"@type": "Question", "name": "¿Cómo protegéis la confidencialidad de mi caso?", "acceptedAnswer": {"@type": "Answer", "text": "Toda la información que comparta está amparada por el secreto profesional del abogado y por el Reglamento General de Protección de Datos (RGPD). Sus datos no se ceden a terceros."}},
+    {"@type": "Question", "name": "¿Dónde está el despacho?", "acceptedAnswer": {"@type": "Answer", "text": "Estamos en Calle Serrano 41, Madrid. Atendemos previa cita de lunes a viernes de 9:00 a 19:00, presencialmente o por videollamada."}}
   ]
 }
 </script>
@@ -112,8 +173,8 @@
   --bg:#0d0d0d;
   --bg-elev:#161616;
   --bg-elev-2:#1d1d1d;
-  --accent:#1a4fd6;
-  --accent-soft:#4a78e8;
+  --fire:#1a4fd6;
+  --fire-soft:#4a78e8;
   --silver:#C0C0C0;
   --ink:#F5F5F5;
   --ink-dim:#b4b4b4;
@@ -141,8 +202,8 @@ body{
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 button{font-family:inherit;cursor:pointer}
-::selection{background:var(--accent);color:#fff}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+::selection{background:var(--fire);color:#fff}
+:focus-visible{outline:2px solid var(--fire);outline-offset:3px;border-radius:2px}
 
 .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(20px,5vw,64px)}
 
@@ -155,13 +216,14 @@ button{font-family:inherit;cursor:pointer}
 }
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;height:74px}
 .brand{display:flex;align-items:center;gap:14px;min-width:0}
+.brand img{height:60px;width:auto}
 .brand-fallback{font-weight:800;letter-spacing:.02em;font-size:20px;color:var(--ink)}
-.brand-fallback span{color:var(--accent)}
+.brand-fallback span{color:var(--fire)}
 .nav{display:flex;align-items:center;gap:34px}
 .nav a,.nav button{font-size:15px;font-weight:500;color:var(--ink-dim);position:relative;padding-block:6px;transition:color .2s ease}
 .nav button{background:none;border:0;font-family:inherit;cursor:pointer;padding-inline:0}
 .nav a:hover,.nav button:hover{color:var(--ink)}
-.nav a::after,.nav button::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent);transition:width .25s ease}
+.nav a::after,.nav button::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--fire);transition:width .25s ease}
 .nav a:hover::after,.nav button:hover::after{width:100%}
 .btn{
   display:inline-flex;align-items:center;gap:9px;
@@ -171,12 +233,12 @@ button{font-family:inherit;cursor:pointer}
   min-height:44px;
 }
 .btn:active{transform:scale(.97)}
-.btn-fire{background:var(--accent);color:#fff}
-.btn-fire:hover{background:var(--accent-soft)}
+.btn-fire{background:var(--fire);color:#fff}
+.btn-fire:hover{background:var(--fire-soft)}
 .btn-ghost{background:transparent;border-color:var(--line-bright);color:var(--ink)}
 .btn-ghost:hover{border-color:var(--silver);background:var(--bg-elev)}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-primary:hover{background:var(--accent-soft);color:#fff}
+.btn-primary{background:var(--fire);color:#fff}
+.btn-primary:hover{background:#143fb0;color:#fff}
 .header-cta{display:flex;align-items:center;gap:14px}
 .nav-toggle{display:none;background:none;border:1px solid var(--line-bright);border-radius:10px;width:46px;height:46px;color:var(--ink)}
 .nav-toggle svg{width:22px;height:22px}
@@ -184,7 +246,7 @@ button{font-family:inherit;cursor:pointer}
 /* ---------- Hero ---------- */
 .hero{position:relative;min-height:clamp(620px,92vh,920px);display:flex;align-items:flex-end;overflow:hidden}
 .hero-media{position:absolute;inset:0;z-index:0}
-.hero-media video,.hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:contrast(1.05) brightness(.58) saturate(1.05)}
+.hero-media img,.hero-media video{width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:contrast(1.05) brightness(.6) saturate(1.05)}
 .hero-media::after{
   content:"";position:absolute;inset:0;
   background:
@@ -192,100 +254,94 @@ button{font-family:inherit;cursor:pointer}
     linear-gradient(0deg, rgba(13,13,13,.96) 2%, rgba(13,13,13,0) 42%);
 }
 .hero-glow{position:absolute;z-index:1;right:-10%;top:8%;width:48vw;height:48vw;max-width:680px;max-height:680px;
-  background:radial-gradient(circle, rgba(26,79,214,.32), rgba(26,79,214,0) 62%);filter:blur(14px);pointer-events:none}
+  background:radial-gradient(circle, rgba(26,79,214,.30), rgba(26,79,214,0) 62%);filter:blur(14px);pointer-events:none}
 .hero-inner{position:relative;z-index:2;width:100%;padding-block:clamp(56px,9vh,120px)}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:48px;align-items:end}
 .credential{
-  display:inline-flex;align-items:center;gap:12px;flex-wrap:wrap;
+  display:inline-flex;align-items:center;gap:12px;
   font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
   color:var(--silver);margin-bottom:26px;
 }
-.credential .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(26,79,214,.2)}
+.credential .dot{width:7px;height:7px;border-radius:50%;background:var(--fire);box-shadow:0 0 0 4px rgba(26,79,214,.18)}
 .credential .bar{width:34px;height:1px;background:var(--line-bright)}
-.credential .free{color:var(--accent-soft)}
 h1.hero-title{
   font-size:clamp(2.6rem,6.4vw,5.4rem);
   line-height:.99;font-weight:800;letter-spacing:-.03em;
-  margin:0 0 18px;text-wrap:balance;
+  margin:0 0 24px;text-wrap:balance;
 }
-h1.hero-title em{font-style:normal;color:var(--accent);display:inline-block}
-.hero-rotator{font-size:clamp(1.1rem,2vw,1.5rem);font-weight:600;color:var(--ink-dim);margin:0 0 22px;letter-spacing:-.01em}
-.hero-rotator em{font-style:normal;color:var(--accent);display:inline-block;transition:opacity .28s ease, transform .28s ease}
+h1.hero-title em{font-style:normal;color:var(--fire);display:inline-block}
 .hero-sub{font-size:clamp(1.02rem,1.5vw,1.22rem);color:var(--ink-dim);max-width:46ch;margin:0 0 34px;text-wrap:pretty}
 .hero-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .hero-actions .btn{padding:15px 26px;font-size:16px}
 .hero-side{padding-bottom:6px}
-.hero-stats{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;grid-template-columns:1fr 1fr}
+.hero-stats{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
 .hero-stat{background:var(--bg);padding:20px 22px}
-.hero-stat b{display:block;font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1}
-.hero-stat span{display:block;margin-top:8px;font-size:13px;color:var(--ink-faint);font-weight:500}
-.hero-stat.accent b{color:var(--accent)}
-
-/* ---------- Reseñas ticker (marquee) ---------- */
-.reviews{background:var(--bg-elev);border-block:1px solid var(--line);padding-block:clamp(32px,5vw,52px);overflow:hidden}
-.reviews-label{text-align:center;color:var(--accent);font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin:0 0 26px}
-.marquee{display:flex;width:max-content;gap:20px;animation:marquee-scroll 46s linear infinite}
-.reviews:hover .marquee{animation-play-state:paused}
-@keyframes marquee-scroll{to{transform:translateX(calc(-50% - 10px))}}
-.rev{flex:0 0 auto;width:340px;background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
-.rev-stars{color:var(--accent);font-size:14px;letter-spacing:2px;margin-bottom:12px}
-.rev-text{color:var(--ink-dim);font-size:14.5px;line-height:1.6;margin:0 0 16px;text-wrap:pretty}
-.rev-who{display:flex;align-items:center;gap:12px}
-.rev-ava{width:38px;height:38px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,rgba(26,79,214,.35),rgba(26,79,214,.12));color:var(--accent-soft);font-weight:700;font-size:14px}
-.rev-name{font-size:14px;font-weight:600;color:var(--ink)}
-.rev-meta{font-size:12.5px;color:var(--ink-faint)}
-@media (prefers-reduced-motion: reduce){.marquee{animation:none;flex-wrap:wrap;width:auto;justify-content:center}}
+.hero-stat b{display:block;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1}
+.hero-stat span{display:block;margin-top:8px;font-size:13.5px;color:var(--ink-faint);font-weight:500}
+.hero-stat.accent b{color:var(--fire)}
 
 /* ---------- Section shared ---------- */
 .section{padding-block:clamp(72px,11vh,140px);position:relative}
 .section-head{max-width:62ch}
-.kicker{font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.kicker{font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--fire)}
 h2.section-title{font-size:clamp(1.9rem,4.2vw,3.2rem);font-weight:700;letter-spacing:-.025em;line-height:1.04;margin:.5em 0 0;text-wrap:balance}
-h2.section-title em{font-style:normal;color:var(--accent)}
 .section-lead{color:var(--ink-dim);font-size:1.06rem;margin-top:18px;max-width:54ch;text-wrap:pretty}
 
-/* ---------- Áreas / Servicios (grid) ---------- */
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,22px);margin-top:clamp(44px,6vw,72px)}
-.svc-card{
-  background:var(--bg-elev);border:1px solid var(--line);border-radius:18px;
-  padding:clamp(26px,3vw,34px);display:flex;flex-direction:column;
-  transition:border-color .2s ease, transform .2s ease, background .2s ease;
+/* ---------- Servicios (editorial asimétrico) ---------- */
+.services{display:flex;flex-direction:column;gap:clamp(28px,5vw,64px);margin-top:clamp(44px,6vw,72px)}
+.svc{
+  display:grid;gap:clamp(24px,4vw,56px);align-items:center;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  padding-block:clamp(20px,3vw,28px);
+  border-top:1px solid var(--line);
 }
-.svc-card:hover{border-color:var(--line-bright);transform:translateY(-3px);background:var(--bg-elev-2)}
-.svc-index{display:flex;align-items:baseline;gap:14px;margin-bottom:18px}
-.svc-index .num{font-size:14px;font-weight:700;color:var(--accent);letter-spacing:.1em}
-.svc-index .tag{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
-.svc-card h3{font-size:clamp(1.3rem,2vw,1.6rem);font-weight:700;letter-spacing:-.02em;margin:0 0 12px;line-height:1.1}
-.svc-card p{color:var(--ink-dim);margin:0 0 20px;font-size:.96rem}
-.svc-list{list-style:none;margin:0 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:9px}
-.svc-list li{font-size:13px;font-weight:500;color:var(--ink);background:var(--bg);border:1px solid var(--line);padding:7px 12px;border-radius:9px}
-.svc-link{margin-top:auto;display:inline-flex;align-items:center;gap:9px;font-weight:600;color:var(--accent);font-size:14.5px;background:none;border:0;padding:0}
-.svc-link svg{width:17px;height:17px;transition:transform .2s ease}
+.svc:first-child{border-top:none;padding-top:0}
+.svc:nth-child(even) .svc-visual{order:2}
+.svc-index{display:flex;align-items:baseline;gap:16px;margin-bottom:18px}
+.svc-index .num{font-size:14px;font-weight:700;color:var(--fire);letter-spacing:.1em}
+.svc-index .tag{font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+.svc h3{font-size:clamp(1.55rem,3vw,2.3rem);font-weight:700;letter-spacing:-.02em;margin:0 0 16px;line-height:1.05}
+.svc p{color:var(--ink-dim);margin:0 0 22px;max-width:48ch}
+.svc-list{list-style:none;margin:0 0 26px;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.svc-list li{
+  font-size:13.5px;font-weight:500;color:var(--ink);
+  background:var(--bg-elev);border:1px solid var(--line);
+  padding:8px 14px;border-radius:10px;
+}
+.svc-link{display:inline-flex;align-items:center;gap:10px;font-weight:600;color:var(--fire);font-size:15px;background:none;border:0;padding:0;cursor:pointer}
+.svc-link svg{width:18px;height:18px;transition:transform .2s ease}
 .svc-link:hover svg{transform:translateX(4px)}
-.svc-card.is-cta{background:linear-gradient(150deg,rgba(26,79,214,.16),rgba(26,79,214,.04));border-color:rgba(26,79,214,.4)}
-.svc-card.is-cta h3{color:var(--ink)}
-.svc-card.is-cta .num,.svc-card.is-cta .svc-link{color:var(--accent-soft)}
+.svc-visual{
+  position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--bg-elev-2),var(--bg-elev));
+  aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
+}
+.svc-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.04) brightness(.82) saturate(1.02)}
+.svc-visual::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 70% 20%,rgba(26,79,214,.14),transparent 55%)}
+.svc-visual .badge{position:absolute;z-index:2;left:18px;bottom:18px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--silver);background:rgba(13,13,13,.7);border:1px solid var(--line-bright);padding:7px 12px;border-radius:8px;backdrop-filter:blur(4px)}
 
-/* ---------- Proceso ---------- */
-.proceso{background:var(--bg-elev);border-block:1px solid var(--line)}
-.proceso-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:clamp(44px,6vw,64px)}
-.paso{background:var(--bg);padding:clamp(30px,4vw,44px)}
-.paso-n{font-size:clamp(2.6rem,5vw,3.6rem);font-weight:800;color:rgba(26,79,214,.28);line-height:1;letter-spacing:-.03em;margin-bottom:18px}
-.paso h3{font-size:clamp(1.2rem,2vw,1.5rem);font-weight:700;letter-spacing:-.02em;margin:0 0 12px;line-height:1.1}
-.paso p{color:var(--ink-dim);margin:0;font-size:.97rem;max-width:34ch}
+/* ---------- Zonas ---------- */
+.zonas{background:var(--bg-elev);border-block:1px solid var(--line)}
+.zonas-text{margin-top:clamp(40px,6vw,60px)}
+.zonas-list{columns:2;column-gap:32px}
+.zonas-list .z{
+  break-inside:avoid;display:flex;align-items:center;gap:12px;
+  padding:13px 0;border-bottom:1px solid var(--line);font-size:16px;font-weight:500;
+}
+.zonas-list .z svg{width:16px;height:16px;color:var(--fire);flex:none}
+.zonas-note{margin-top:26px;color:var(--ink-faint);font-size:14.5px}
 
-/* ---------- Equipo ---------- */
-.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,22px);margin-top:clamp(44px,6vw,64px)}
-.team-card{background:var(--bg-elev);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:border-color .2s ease,transform .2s ease}
-.team-card:hover{border-color:var(--line-bright);transform:translateY(-3px)}
-.team-av{height:148px;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,rgba(26,79,214,.18),rgba(13,13,13,.5));
-  font-size:3rem;font-weight:800;color:rgba(74,120,232,.6);letter-spacing:-.02em}
-.team-info{padding:24px}
-.team-name{font-size:1.15rem;font-weight:700;color:var(--ink);margin:0 0 6px;letter-spacing:-.01em}
-.team-role{font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin:0 0 10px}
-.team-col{font-size:13px;color:var(--ink-faint);margin:0}
+/* ---------- Colaboradores / Marcas (logos) ---------- */
+.logo-band{margin-top:clamp(28px,4vw,44px);background:rgba(255,255,255,0.03);
+  border-top:1px solid rgba(255,255,255,0.06);border-radius:16px;
+  padding:clamp(26px,3.5vw,40px) clamp(20px,3vw,32px)}
+.logo-label{text-align:center;color:var(--fire);font-size:12.5px;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;margin:0 0 28px}
+.logo-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(24px,4vw,40px)}
+.logo-row img{height:36px;width:auto;filter:brightness(0) invert(0.7);transition:filter .2s ease}
+.logo-row img:hover{filter:brightness(0) invert(1)}
+.logo-row .logo-text{height:36px;width:auto;color:#b3b3b3;transition:color .2s ease}
+.logo-row .logo-text:hover{color:#fff}
 
 /* ---------- FAQ ---------- */
 .faq-wrap{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr);gap:clamp(36px,6vw,72px);margin-top:clamp(36px,5vw,56px);align-items:start}
@@ -300,15 +356,16 @@ h2.section-title em{font-style:normal;color:var(--accent)}
   padding:22px 4px;font-size:clamp(1.02rem,1.7vw,1.22rem);font-weight:600;line-height:1.35;cursor:pointer;
 }
 .faq-q::-webkit-details-marker{display:none}
-.faq-q:hover{color:var(--accent-soft)}
+.faq-q:hover{color:var(--fire-soft)}
 .faq-icon{flex:none;width:26px;height:26px;border:1px solid var(--line-bright);border-radius:50%;position:relative;transition:border-color .2s ease}
-.faq-icon::before,.faq-icon::after{content:"";position:absolute;background:var(--accent);left:50%;top:50%;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.faq-icon::before,.faq-icon::after{content:"";position:absolute;background:var(--fire);left:50%;top:50%;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
 .faq-icon::before{width:11px;height:2px;transform:translate(-50%,-50%)}
 .faq-icon::after{width:2px;height:11px;transform:translate(-50%,-50%)}
 .faq-item[open] .faq-icon::after{transform:translate(-50%,-50%) scaleY(0)}
-.faq-item[open] .faq-icon{border-color:var(--accent)}
+.faq-item[open] .faq-icon{border-color:var(--fire)}
 .faq-a{overflow:hidden}
 .faq-a p{margin:0;padding:0 40px 26px 4px;color:var(--ink-dim);max-width:64ch;text-wrap:pretty}
+/* native details animation-safe: content visible by default */
 
 /* ---------- CTA chat ---------- */
 .cta-chat{background:var(--bg-elev);border-top:1px solid var(--line);text-align:center;
@@ -317,9 +374,9 @@ h2.section-title em{font-style:normal;color:var(--accent)}
 .cta-chat h2{font-size:clamp(1.9rem,4.2vw,3rem);font-weight:700;letter-spacing:-.025em;line-height:1.05;margin:0;text-wrap:balance}
 .cta-chat p{color:var(--ink-dim);font-size:1.06rem;max-width:46ch;margin:18px auto 32px;text-wrap:pretty}
 .cta-chat button{display:inline-flex;align-items:center;gap:9px;font-family:inherit;font-weight:600;font-size:16px;
-  border:0;border-radius:999px;padding:16px 30px;min-height:48px;cursor:pointer;background:var(--accent);color:#fff;
+  border:0;border-radius:999px;padding:16px 30px;min-height:48px;cursor:pointer;background:var(--fire);color:#fff;
   transition:transform .15s ease, background .2s ease}
-.cta-chat button:hover{background:var(--accent-soft)}
+.cta-chat button:hover{background:var(--fire-soft)}
 .cta-chat button:active{transform:scale(.97)}
 
 /* ---------- Footer ---------- */
@@ -329,7 +386,7 @@ h2.section-title em{font-style:normal;color:var(--accent)}
 .footer-brand p{color:var(--ink-faint);font-size:14.5px;max-width:34ch;margin:18px 0 22px}
 .socials{display:flex;gap:12px}
 .socials a{width:44px;height:44px;border:1px solid var(--line-bright);border-radius:11px;display:flex;align-items:center;justify-content:center;color:var(--silver);transition:color .2s ease,border-color .2s ease}
-.socials a:hover{color:var(--accent);border-color:var(--accent)}
+.socials a:hover{color:var(--fire);border-color:var(--fire)}
 .socials svg{width:20px;height:20px}
 .footer-col h3{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 18px;font-weight:600}
 .footer-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
@@ -357,9 +414,10 @@ h2.section-title em{font-style:normal;color:var(--accent)}
   .nav.open a,.nav.open button{padding:15px 0;border-bottom:1px solid var(--line);width:100%;text-align:left}
   .nav.open a::after,.nav.open button::after{display:none}
   .hero-grid{grid-template-columns:1fr;gap:40px}
-  .svc-grid{grid-template-columns:1fr 1fr}
-  .proceso-grid{grid-template-columns:1fr}
-  .team-grid{grid-template-columns:1fr 1fr}
+  .hero-stats{grid-template-columns:repeat(3,1fr)}
+  .hero-stat{padding:16px}
+  .svc{grid-template-columns:1fr;gap:24px}
+  .svc:nth-child(even) .svc-visual{order:0}
   .faq-wrap{grid-template-columns:1fr}
   .faq-aside{position:static}
   .footer-grid{grid-template-columns:1fr 1fr}
@@ -367,16 +425,19 @@ h2.section-title em{font-style:normal;color:var(--accent)}
 }
 @media (max-width:600px){
   .header-inner{height:64px}
+  .site-header{}
+  .brand img{height:44px}
   .hero{min-height:auto;padding-top:20px}
   .hero-stats{grid-template-columns:1fr;gap:1px}
   .hero-stat{display:flex;align-items:baseline;gap:14px}
-  .hero-stat b{font-size:1.8rem}
+  .hero-stat b{font-size:1.9rem}
   .hero-stat span{margin-top:0}
   .hero-actions{flex-direction:column;align-items:stretch}
   .hero-actions .btn{justify-content:center}
-  .svc-grid{grid-template-columns:1fr}
-  .team-grid{grid-template-columns:1fr}
-  .rev{width:280px}
+  .zonas-list{columns:1}
+  .field-row{grid-template-columns:1fr}
+  .logo-row{gap:22px}
+  .logo-row img,.logo-row .logo-text{height:30px}
   .footer-grid{grid-template-columns:1fr}
 }
 </style>
@@ -390,11 +451,11 @@ h2.section-title em{font-style:normal;color:var(--accent)}
       <span class="brand-fallback">MARTÍNEZ <span>&amp; ASOCIADOS</span></span>
     </a>
     <nav class="nav" id="nav" aria-label="Navegación principal">
-      <a href="#areas">Áreas</a>
-      <a href="#proceso">Proceso</a>
-      <a href="#equipo">Equipo</a>
-      <a href="#resenas">Reseñas</a>
-      <a href="#faq">FAQ</a>
+      <a href="#servicios">Áreas</a>
+      <a href="#civil">Civil</a>
+      <a href="#penal">Penal</a>
+      <a href="#laboral">Laboral</a>
+      <a href="#zonas">Dónde actuamos</a>
       <a href="#footer">Contacto</a>
     </nav>
     <div class="header-cta">
@@ -423,222 +484,204 @@ h2.section-title em{font-style:normal;color:var(--accent)}
   <div class="wrap hero-inner">
     <div class="hero-grid">
       <div class="hero-copy">
-        <p class="credential"><span class="dot"></span> Despacho de Abogados · Madrid <span class="bar"></span> <span class="free">· Primera consulta gratuita</span></p>
-        <h1 class="hero-title">Tu Defensa.<br><em>Nuestra Misión.</em></h1>
-        <p class="hero-rotator">Especialistas en Derecho <em><span id="rotWord">Civil</span></em></p>
-        <p class="hero-sub">Abogados colegiados en Madrid. Estudiamos su caso, le explicamos sus opciones con honestidad y le defendemos con rigor. Presupuesto cerrado y sin sorpresas.</p>
+        <p class="credential"><span class="dot"></span> Despacho de Abogados · Madrid <span class="bar"></span> Primera consulta gratuita</p>
+        <h1 class="hero-title">Tu defensa, <em>sin sorpresas</em><br>en Madrid.</h1>
+        <p class="hero-sub">Abogados colegiados desde 2004. Resolvemos asuntos de derecho civil, penal, laboral, mercantil e inmobiliario con presupuesto cerrado y un único responsable de su caso.</p>
         <div class="hero-actions">
-          <button class="btn btn-fire" type="button" onclick="document.getElementById('lex-toggle')?.click()">
-            Consulta gratuita
-          </button>
-          <a class="btn btn-ghost" href="#areas">Ver áreas</a>
+          <a class="btn btn-fire" href="tel:+34914567890">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            91 456 78 90
+          </a>
+          <a class="btn btn-ghost" href="#servicios">Ver áreas</a>
         </div>
       </div>
       <aside class="hero-side">
         <div class="hero-stats">
-          <div class="hero-stat accent"><b>20+ años</b><span>De experiencia en los tribunales</span></div>
+          <div class="hero-stat accent"><b>2004</b><span>Despacho colegiado en ejercicio</span></div>
           <div class="hero-stat"><b>500+ casos</b><span>Resueltos para nuestros clientes</span></div>
-          <div class="hero-stat"><b>4.9★</b><span>Valoración media de clientes</span></div>
-          <div class="hero-stat accent"><b>Gratis</b><span>Primera consulta sin compromiso</span></div>
+          <div class="hero-stat"><b>5 áreas</b><span>Civil, penal, laboral, mercantil e inmobiliario</span></div>
         </div>
       </aside>
     </div>
   </div>
 </section>
 
-<!-- ============ RESEÑAS (ticker) ============ -->
-<section class="reviews" id="resenas" aria-label="Reseñas de clientes">
-  <p class="reviews-label">Lo que dicen nuestros clientes</p>
-  <div class="marquee" id="marquee">
-    <!-- set 1 -->
-    <article class="rev">
-      <div class="rev-stars" aria-label="5 sobre 5">★★★★★</div>
-      <p class="rev-text">“Llevaron mi divorcio con una delicadeza y una firmeza que no esperaba. En todo momento supe en qué punto estaba mi caso.”</p>
-      <div class="rev-who"><span class="rev-ava">EM</span><div><div class="rev-name">Elena M.</div><div class="rev-meta">Derecho de Familia</div></div></div>
-    </article>
-    <article class="rev">
-      <div class="rev-stars" aria-label="5 sobre 5">★★★★★</div>
-      <p class="rev-text">“Me asistieron en una causa penal muy complicada. Profesionalidad absoluta y disponibilidad real cuando más lo necesitaba.”</p>
-      <div class="rev-who"><span class="rev-ava">JR</span><div><div class="rev-name">Javier R.</div><div class="rev-meta">Derecho Penal</div></div></div>
-    </article>
-    <article class="rev">
-      <div class="rev-stars" aria-label="5 sobre 5">★★★★★</div>
-      <p class="rev-text">“Tras un despido improcedente recuperé lo que me correspondía. Me explicaron cada paso sin tecnicismos. Recomendables al 100%.”</p>
-      <div class="rev-who"><span class="rev-ava">CN</span><div><div class="rev-name">Carmen N.</div><div class="rev-meta">Derecho Laboral</div></div></div>
-    </article>
-    <article class="rev">
-      <div class="rev-stars" aria-label="5 sobre 5">★★★★★</div>
-      <p class="rev-text">“Constituyeron mi sociedad y ahora llevan todo el asesoramiento mercantil. Un equipo serio en el que se puede confiar.”</p>
-      <div class="rev-who"><span class="rev-ava">DS</span><div><div class="rev-name">David S.</div><div class="rev-meta">Derecho Mercantil</div></div></div>
-    </article>
-    <article class="rev">
-      <div class="rev-stars" aria-label="5 sobre 5">★★★★★</div>
-      <p class="rev-text">“Compraventa de vivienda sin un solo susto. Revisaron cada cláusula y me ahorraron un problema que ni había visto.”</p>
-      <div class="rev-who"><span class="rev-ava">LP</span><div><div class="rev-name">Lucía P.</div><div class="rev-meta">Derecho Inmobiliario</div></div></div>
-    </article>
-    <article class="rev">
-      <div class="rev-stars" aria-label="5 sobre 5">★★★★★</div>
-      <p class="rev-text">“La primera consulta fue gratuita y honesta: me dijeron incluso lo que no me interesaba demandar. Esa transparencia me hizo quedarme.”</p>
-      <div class="rev-who"><span class="rev-ava">AG</span><div><div class="rev-name">Antonio G.</div><div class="rev-meta">Derecho Civil</div></div></div>
-    </article>
-    <!-- set 2 (duplicado para loop continuo) -->
-    <article class="rev" aria-hidden="true">
-      <div class="rev-stars">★★★★★</div>
-      <p class="rev-text">“Llevaron mi divorcio con una delicadeza y una firmeza que no esperaba. En todo momento supe en qué punto estaba mi caso.”</p>
-      <div class="rev-who"><span class="rev-ava">EM</span><div><div class="rev-name">Elena M.</div><div class="rev-meta">Derecho de Familia</div></div></div>
-    </article>
-    <article class="rev" aria-hidden="true">
-      <div class="rev-stars">★★★★★</div>
-      <p class="rev-text">“Me asistieron en una causa penal muy complicada. Profesionalidad absoluta y disponibilidad real cuando más lo necesitaba.”</p>
-      <div class="rev-who"><span class="rev-ava">JR</span><div><div class="rev-name">Javier R.</div><div class="rev-meta">Derecho Penal</div></div></div>
-    </article>
-    <article class="rev" aria-hidden="true">
-      <div class="rev-stars">★★★★★</div>
-      <p class="rev-text">“Tras un despido improcedente recuperé lo que me correspondía. Me explicaron cada paso sin tecnicismos. Recomendables al 100%.”</p>
-      <div class="rev-who"><span class="rev-ava">CN</span><div><div class="rev-name">Carmen N.</div><div class="rev-meta">Derecho Laboral</div></div></div>
-    </article>
-    <article class="rev" aria-hidden="true">
-      <div class="rev-stars">★★★★★</div>
-      <p class="rev-text">“Constituyeron mi sociedad y ahora llevan todo el asesoramiento mercantil. Un equipo serio en el que se puede confiar.”</p>
-      <div class="rev-who"><span class="rev-ava">DS</span><div><div class="rev-name">David S.</div><div class="rev-meta">Derecho Mercantil</div></div></div>
-    </article>
-    <article class="rev" aria-hidden="true">
-      <div class="rev-stars">★★★★★</div>
-      <p class="rev-text">“Compraventa de vivienda sin un solo susto. Revisaron cada cláusula y me ahorraron un problema que ni había visto.”</p>
-      <div class="rev-who"><span class="rev-ava">LP</span><div><div class="rev-name">Lucía P.</div><div class="rev-meta">Derecho Inmobiliario</div></div></div>
-    </article>
-    <article class="rev" aria-hidden="true">
-      <div class="rev-stars">★★★★★</div>
-      <p class="rev-text">“La primera consulta fue gratuita y honesta: me dijeron incluso lo que no me interesaba demandar. Esa transparencia me hizo quedarme.”</p>
-      <div class="rev-who"><span class="rev-ava">AG</span><div><div class="rev-name">Antonio G.</div><div class="rev-meta">Derecho Civil</div></div></div>
-    </article>
-  </div>
-</section>
-
-<!-- ============ ÁREAS / SERVICIOS ============ -->
-<section class="section wrap" id="areas">
+<!-- ============ SERVICIOS ============ -->
+<section class="section wrap" id="servicios">
   <div class="section-head reveal">
-    <span class="kicker">Áreas de práctica</span>
-    <h2 class="section-title">Especialistas en cada rama del derecho.</h2>
-    <p class="section-lead">Un equipo multidisciplinar que asesora y defiende a particulares y empresas con un único responsable de su caso de principio a fin.</p>
+    <span class="kicker">Lo que hacemos</span>
+    <h2 class="section-title">Cinco áreas, un solo equipo colegiado.</h2>
+    <p class="section-lead">Asesoramos y defendemos a particulares y empresas. Mismo equipo, mismos abogados y un único responsable de su caso de principio a fin.</p>
   </div>
 
-  <div class="svc-grid">
-    <article class="svc-card reveal">
-      <div class="svc-index"><span class="num">01</span><span class="tag">Particulares y empresas</span></div>
-      <h3>Derecho Civil</h3>
-      <p>Resolvemos los conflictos del día a día y protegemos su patrimonio con estrategias claras y cerradas en presupuesto.</p>
-      <ul class="svc-list"><li>Divorcios</li><li>Herencias</li><li>Contratos</li><li>Reclamaciones</li></ul>
-      <button class="svc-link" type="button" onclick="document.getElementById('lex-toggle')?.click()">Consultar área
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  <div class="services">
+    <!-- CIVIL -->
+    <article class="svc reveal" id="civil">
+      <div class="svc-body">
+        <div class="svc-index"><span class="num">01</span><span class="tag">Particulares y familia</span></div>
+        <h3>Derecho Civil con la estrategia adecuada</h3>
+        <p>Resolvemos los conflictos del día a día y protegemos su patrimonio: divorcios, herencias, contratos y reclamaciones, siempre con presupuesto cerrado.</p>
+        <ul class="svc-list">
+          <li>Divorcios</li>
+          <li>Herencias</li>
+          <li>Contratos</li>
+          <li>Reclamaciones de cantidad</li>
+          <li>Responsabilidad civil</li>
+        </ul>
+        <button class="svc-link" type="button" onclick="document.getElementById('lex-toggle')?.click()">Consultar derecho civil
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="svc-visual">
+        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=70"
+             alt="Despacho de abogados — derecho civil en Madrid" width="600" height="450" loading="lazy" onerror="this.style.display='none'">
+        <span class="badge">Familia · Herencias · Contratos</span>
+      </div>
     </article>
 
-    <article class="svc-card reveal">
-      <div class="svc-index"><span class="num">02</span><span class="tag">Defensa integral</span></div>
-      <h3>Derecho Penal</h3>
-      <p>Defensa penal rigurosa en todas las fases del procedimiento, con asistencia al detenido y recursos ante instancias superiores.</p>
-      <ul class="svc-list"><li>Defensa penal</li><li>Recursos</li><li>Asistencia 24h</li><li>Víctimas</li></ul>
-      <button class="svc-link" type="button" onclick="document.getElementById('lex-toggle')?.click()">Consultar área
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <!-- PENAL -->
+    <article class="svc reveal" id="penal">
+      <div class="svc-visual">
+        <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=600&q=70"
+             alt="Defensa penal en Madrid — Martínez & Asociados" width="600" height="450" loading="lazy" onerror="this.style.display='none'">
+        <span class="badge">Defensa · Recursos · 24h</span>
+      </div>
+      <div class="svc-body">
+        <div class="svc-index"><span class="num">02</span><span class="tag">Defensa integral</span></div>
+        <h3>Derecho Penal que no deja cabos sueltos</h3>
+        <p>Defensa rigurosa en todas las fases del procedimiento, con asistencia al detenido y recursos ante instancias superiores. También representamos a la víctima.</p>
+        <ul class="svc-list">
+          <li>Defensa penal</li>
+          <li>Asistencia al detenido</li>
+          <li>Recursos</li>
+          <li>Acusación particular</li>
+          <li>Delitos económicos</li>
+        </ul>
+        <button class="svc-link" type="button" onclick="document.getElementById('lex-toggle')?.click()">Consultar derecho penal
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
     </article>
 
-    <article class="svc-card reveal">
-      <div class="svc-index"><span class="num">03</span><span class="tag">Trabajadores y empresa</span></div>
-      <h3>Derecho Laboral</h3>
-      <p>Reclamamos lo que le corresponde y asesoramos a la empresa en sus relaciones laborales, desde el contrato hasta el juzgado.</p>
-      <ul class="svc-list"><li>Despidos</li><li>EREs</li><li>Accidentes</li><li>Reclamaciones</li></ul>
-      <button class="svc-link" type="button" onclick="document.getElementById('lex-toggle')?.click()">Consultar área
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <!-- LABORAL -->
+    <article class="svc reveal" id="laboral">
+      <div class="svc-body">
+        <div class="svc-index"><span class="num">03</span><span class="tag">Trabajadores y empresa</span></div>
+        <h3>Derecho Laboral del contrato al juzgado</h3>
+        <p>Reclamamos lo que le corresponde y asesoramos a la empresa en sus relaciones laborales: despidos, EREs, reclamaciones salariales y accidentes de trabajo.</p>
+        <ul class="svc-list">
+          <li>Despidos</li>
+          <li>EREs y ERTEs</li>
+          <li>Reclamaciones salariales</li>
+          <li>Accidentes laborales</li>
+          <li>Acoso laboral</li>
+        </ul>
+        <button class="svc-link" type="button" onclick="document.getElementById('lex-toggle')?.click()">Consultar derecho laboral
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="svc-visual">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=600&q=70"
+             alt="Asesoramiento laboral en Madrid — despidos y EREs" width="600" height="450" loading="lazy" onerror="this.style.display='none'">
+        <span class="badge">Despidos · EREs · Accidentes</span>
+      </div>
     </article>
 
-    <article class="svc-card reveal">
-      <div class="svc-index"><span class="num">04</span><span class="tag">Asesoramiento empresarial</span></div>
-      <h3>Derecho Mercantil</h3>
-      <p>Acompañamos a autónomos y pymes en la constitución, la contratación y la gestión de situaciones concursales.</p>
-      <ul class="svc-list"><li>Sociedades</li><li>Concursos</li><li>Contratos</li><li>Compliance</li></ul>
-      <button class="svc-link" type="button" onclick="document.getElementById('lex-toggle')?.click()">Consultar área
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <!-- MERCANTIL -->
+    <article class="svc reveal" id="mercantil">
+      <div class="svc-visual">
+        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=600&q=70"
+             alt="Derecho mercantil y societario en Madrid" width="600" height="450" loading="lazy" onerror="this.style.display='none'">
+        <span class="badge">Sociedades · Concursal · Contratos</span>
+      </div>
+      <div class="svc-body">
+        <div class="svc-index"><span class="num">04</span><span class="tag">Asesoramiento empresarial</span></div>
+        <h3>Derecho Mercantil para autónomos y pymes</h3>
+        <p>Acompañamos a la empresa en la constitución, la contratación y la gestión de situaciones concursales, actuando como su partner jurídico a largo plazo.</p>
+        <ul class="svc-list">
+          <li>Constitución de sociedades</li>
+          <li>Concurso de acreedores</li>
+          <li>Contratos mercantiles</li>
+          <li>Reclamación de impagos</li>
+          <li>Compliance</li>
+        </ul>
+        <button class="svc-link" type="button" onclick="document.getElementById('lex-toggle')?.click()">Consultar derecho mercantil
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
     </article>
 
-    <article class="svc-card reveal">
-      <div class="svc-index"><span class="num">05</span><span class="tag">Vivienda y locales</span></div>
-      <h3>Derecho Inmobiliario</h3>
-      <p>Revisamos cada operación inmobiliaria para que compre, venda o alquile con total seguridad jurídica.</p>
-      <ul class="svc-list"><li>Compraventas</li><li>Arrendamientos</li><li>Comunidades</li><li>Desahucios</li></ul>
-      <button class="svc-link" type="button" onclick="document.getElementById('lex-toggle')?.click()">Consultar área
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-    </article>
-
-    <article class="svc-card is-cta reveal">
-      <div class="svc-index"><span class="num">06</span><span class="tag">Sin compromiso</span></div>
-      <h3>Consulta inicial gratuita</h3>
-      <p>Cuéntenos su caso por el chat y le orientamos con honestidad. Si decide contar con nosotros, presupuesto cerrado antes de empezar.</p>
-      <ul class="svc-list"><li>Sin coste</li><li>Sin compromiso</li><li>Respuesta el mismo día</li></ul>
-      <button class="svc-link" type="button" onclick="document.getElementById('lex-toggle')?.click()">Empezar ahora
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <!-- INMOBILIARIO -->
+    <article class="svc reveal" id="inmobiliario">
+      <div class="svc-body">
+        <div class="svc-index"><span class="num">05</span><span class="tag">Vivienda y locales</span></div>
+        <h3>Derecho Inmobiliario con seguridad jurídica</h3>
+        <p>Revisamos cada operación para que compre, venda o alquile sin un solo susto: contratos, arrendamientos, comunidades de propietarios y desahucios.</p>
+        <ul class="svc-list">
+          <li>Compraventas</li>
+          <li>Arrendamientos</li>
+          <li>Comunidades de propietarios</li>
+          <li>Desahucios</li>
+          <li>Cláusulas abusivas</li>
+        </ul>
+        <button class="svc-link" type="button" onclick="document.getElementById('lex-toggle')?.click()">Consultar derecho inmobiliario
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="svc-visual">
+        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=70"
+             alt="Derecho inmobiliario en Madrid — compraventas y arrendamientos" width="600" height="450" loading="lazy" onerror="this.style.display='none'">
+        <span class="badge">Compraventa · Alquiler · Comunidades</span>
+      </div>
     </article>
   </div>
 </section>
 
-<!-- ============ PROCESO ============ -->
-<section class="proceso section" id="proceso">
+<!-- ============ ZONAS ============ -->
+<section class="zonas section" id="zonas">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="kicker">Cómo trabajamos</span>
-      <h2 class="section-title">De la consulta al resultado, <em>sin sorpresas.</em></h2>
+      <span class="kicker">Dónde actuamos</span>
+      <h2 class="section-title">Madrid y toda España por videollamada.</h2>
     </div>
-    <div class="proceso-grid reveal">
-      <div class="paso">
-        <div class="paso-n">01</div>
-        <h3>Consulta gratuita</h3>
-        <p>Sin compromiso. Nos cuenta su caso, le escuchamos y le orientamos con honestidad sobre sus opciones reales.</p>
-      </div>
-      <div class="paso">
-        <div class="paso-n">02</div>
-        <h3>Analizamos su caso</h3>
-        <p>Estudiamos su asunto en detalle y diseñamos la mejor estrategia, con presupuesto cerrado por escrito antes de empezar.</p>
-      </div>
-      <div class="paso">
-        <div class="paso-n">03</div>
-        <h3>Defendemos sus derechos</h3>
-        <p>Actuamos con rigor: escritos, negociación y representación ante los tribunales. Le informamos en cada fase.</p>
-      </div>
+    <div class="zonas-text reveal">
+      <ul class="zonas-list">
+          <li class="z"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Madrid capital</li>
+          <li class="z"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Comunidad de Madrid</li>
+          <li class="z"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Juzgados de Madrid</li>
+          <li class="z"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Audiencia Provincial</li>
+          <li class="z"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Audiencia Nacional</li>
+          <li class="z"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Tribunal Superior de Justicia</li>
+          <li class="z"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Comisaría y juzgado de guardia</li>
+          <li class="z"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Videollamada (toda España)</li>
+          <li class="z"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Resto de España (según procedimiento)</li>
+        </ul>
+      <p class="zonas-note">¿Su asunto está fuera de Madrid? Cuéntenoslo: gestionamos casos de toda España de forma presencial o por videollamada.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ EQUIPO ============ -->
-<section class="section wrap" id="equipo">
+<!-- ============ COLABORADORES ============ -->
+<section class="section wrap" id="colaboradores">
   <div class="section-head reveal">
-    <span class="kicker">El equipo</span>
-    <h2 class="section-title">Abogados con nombre y trayectoria.</h2>
-    <p class="section-lead">Profesionales colegiados que dedican a cada cliente la atención que merece su situación concreta.</p>
+    <span class="kicker">Respaldo</span>
+    <h2 class="section-title">Abogados colegiados y al día con las instituciones.</h2>
+    <p class="section-lead">Nuestros profesionales están colegiados en el ICAM y vinculados a las principales instituciones de la abogacía española.</p>
   </div>
-  <div class="team-grid">
-    <article class="team-card reveal">
-      <div class="team-av" aria-hidden="true">EN</div>
-      <div class="team-info">
-        <h3 class="team-name">Dña. Elena Navarro</h3>
-        <p class="team-role">Civil y Familia</p>
-        <p class="team-col">Colegiada n.º 12.847 · ICAM</p>
-      </div>
-    </article>
-    <article class="team-card reveal">
-      <div class="team-av" aria-hidden="true">JR</div>
-      <div class="team-info">
-        <h3 class="team-name">D. Javier Robles</h3>
-        <p class="team-role">Penal · Asistencia 24h</p>
-        <p class="team-col">Colegiado n.º 9.214 · ICAM</p>
-      </div>
-    </article>
-    <article class="team-card reveal">
-      <div class="team-av" aria-hidden="true">AS</div>
-      <div class="team-info">
-        <h3 class="team-name">D. Andrés Soto</h3>
-        <p class="team-role">Laboral y Mercantil</p>
-        <p class="team-col">Colegiado n.º 14.503 · ICAM</p>
-      </div>
-    </article>
+
+  <!-- BLOQUE 1 — Colegiados en -->
+  <div class="logo-band reveal">
+    <p class="logo-label">Colegiados y vinculados a</p>
+    <div class="logo-row">
+      <svg class="logo-text" viewBox="0 0 80 36" width="80" height="36" role="img" aria-label="ICAM"><text x="0" y="26" textLength="80" lengthAdjust="spacingAndGlyphs" font-family="Sora,system-ui,sans-serif" font-weight="700" font-size="23" fill="currentColor">ICAM</text></svg>
+      <svg class="logo-text" viewBox="0 0 300 36" width="300" height="36" role="img" aria-label="Consejo General de la Abogacía"><text x="0" y="26" textLength="300" lengthAdjust="spacingAndGlyphs" font-family="Sora,system-ui,sans-serif" font-weight="700" font-size="23" fill="currentColor">Consejo General de la Abogacía</text></svg>
+      <svg class="logo-text" viewBox="0 0 168 36" width="168" height="36" role="img" aria-label="Unión Profesional"><text x="0" y="26" textLength="168" lengthAdjust="spacingAndGlyphs" font-family="Sora,system-ui,sans-serif" font-weight="700" font-size="23" fill="currentColor">Unión Profesional</text></svg>
+    </div>
+  </div>
+
+  <!-- BLOQUE 2 — Compromiso -->
+  <div class="logo-band reveal">
+    <p class="logo-label">Nuestro compromiso</p>
+    <div class="logo-row">
+      <svg class="logo-text" viewBox="0 0 210 36" width="210" height="36" role="img" aria-label="Presupuesto cerrado"><text x="0" y="26" textLength="210" lengthAdjust="spacingAndGlyphs" font-family="Sora,system-ui,sans-serif" font-weight="700" font-size="23" fill="currentColor">PRESUPUESTO CERRADO</text></svg>
+      <svg class="logo-text" viewBox="0 0 230 36" width="230" height="36" role="img" aria-label="Primera consulta gratuita"><text x="0" y="26" textLength="230" lengthAdjust="spacingAndGlyphs" font-family="Sora,system-ui,sans-serif" font-weight="700" font-size="23" fill="currentColor">CONSULTA GRATUITA</text></svg>
+      <svg class="logo-text" viewBox="0 0 200 36" width="200" height="36" role="img" aria-label="Secreto profesional"><text x="0" y="26" textLength="200" lengthAdjust="spacingAndGlyphs" font-family="Sora,system-ui,sans-serif" font-weight="700" font-size="23" fill="currentColor">SECRETO PROFESIONAL</text></svg>
+    </div>
   </div>
 </section>
 
@@ -671,16 +714,24 @@ h2.section-title em{font-style:normal;color:var(--accent)}
         <div class="faq-a"><p>Sí. Atendemos a clientes de toda España por videollamada y gestión documental digital, y comparecemos en el juzgado que corresponda cuando el procedimiento lo requiere.</p></div>
       </details>
       <details class="faq-item">
-        <summary class="faq-q">¿Cuánto tarda un procedimiento judicial?<span class="faq-icon" aria-hidden="true"></span></summary>
-        <div class="faq-a"><p>Depende del tipo de procedimiento y de la carga del juzgado. Le damos plazos realistas desde el primer momento y le mantenemos informado en cada fase, sin promesas que no podamos cumplir.</p></div>
-      </details>
-      <details class="faq-item">
         <summary class="faq-q">¿Ofrecéis asistencia penal urgente?<span class="faq-icon" aria-hidden="true"></span></summary>
         <div class="faq-a"><p>Sí. Contamos con asistencia al detenido para comisaría o juzgado de guardia. Si necesita ayuda urgente, indíquelo en el chat o llámenos al 91 456 78 90 y le orientamos de inmediato.</p></div>
       </details>
       <details class="faq-item">
+        <summary class="faq-q">¿Cuánto tarda un procedimiento judicial?<span class="faq-icon" aria-hidden="true"></span></summary>
+        <div class="faq-a"><p>Depende del tipo de procedimiento y de la carga del juzgado. Le damos plazos realistas desde el primer momento y le mantenemos informado en cada fase, sin promesas que no podamos cumplir.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">¿En qué áreas del derecho trabajáis?<span class="faq-icon" aria-hidden="true"></span></summary>
+        <div class="faq-a"><p>Derecho civil (divorcios, herencias, contratos), penal (defensa y recursos), laboral (despidos, EREs, accidentes), mercantil (sociedades, concursos) e inmobiliario (compraventas, arrendamientos).</p></div>
+      </details>
+      <details class="faq-item">
         <summary class="faq-q">¿Cómo protegéis la confidencialidad de mi caso?<span class="faq-icon" aria-hidden="true"></span></summary>
         <div class="faq-a"><p>Toda la información que comparta está amparada por el secreto profesional del abogado y por el Reglamento General de Protección de Datos (RGPD). Sus datos no se ceden a terceros.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">¿Dónde está el despacho?<span class="faq-icon" aria-hidden="true"></span></summary>
+        <div class="faq-a"><p>Estamos en Calle Serrano 41, Madrid. Atendemos previa cita de lunes a viernes de 9:00 a 19:00, presencialmente o por videollamada.</p></div>
       </details>
     </div>
   </div>
@@ -689,9 +740,9 @@ h2.section-title em{font-style:normal;color:var(--accent)}
 <!-- ============ CTA CHAT ============ -->
 <section class="cta-chat" id="contacto">
   <div class="wrap">
-    <h2>¿Hablamos de su caso?</h2>
-    <p>Cuéntenos qué necesita por el chat y nuestro equipo le contactará el mismo día laborable.</p>
-    <button type="button" onclick="document.getElementById('lex-toggle')?.click()">Abrir chat →</button>
+    <h2>¿Hablamos?</h2>
+    <p>Cuéntenos su caso por el chat y nuestro equipo le contactará el mismo día laborable.</p>
+    <button onclick="document.getElementById('lex-toggle')?.click()">Abrir chat →</button>
   </div>
 </section>
 
@@ -702,9 +753,12 @@ h2.section-title em{font-style:normal;color:var(--accent)}
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <span class="brand-fallback">MARTÍNEZ <span style="color:var(--accent)">&amp; ASOCIADOS</span></span>
-        <p>Despacho de abogados en Madrid. Derecho civil, penal, laboral, mercantil e inmobiliario para particulares y empresas. Primera consulta gratuita.</p>
+        <span class="brand-fallback">MARTÍNEZ <span style="color:var(--fire)">&amp; ASOCIADOS</span></span>
+        <p>Despacho de abogados en Madrid. Derecho civil, penal, laboral, mercantil e inmobiliario para particulares y empresas. Colegiados desde 2004.</p>
         <div class="socials">
+          <a href="https://wa.me/34643199580" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.8 14.06c-.24.68-1.4 1.3-1.93 1.38-.49.07-1.13.1-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.94-4.37-.14-.19-1.18-1.57-1.18-2.99s.75-2.12 1.01-2.41c.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.59.83 2.03.9 2.18.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.16-.29.36-.42.49-.14.14-.28.29-.12.57.16.29.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.22 1.37.27.14.43.12.59-.07.16-.19.68-.79.86-1.07.18-.27.36-.22.61-.13.24.09 1.55.73 1.82.86.27.14.45.2.51.31.07.11.07.63-.17 1.31z"/></svg>
+          </a>
           <a href="tel:+34914567890" aria-label="Teléfono">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </a>
@@ -716,11 +770,12 @@ h2.section-title em{font-style:normal;color:var(--accent)}
       <div class="footer-col">
         <h3>Áreas</h3>
         <ul>
-          <li><a href="#areas">Derecho Civil</a></li>
-          <li><a href="#areas">Derecho Penal</a></li>
-          <li><a href="#areas">Derecho Laboral</a></li>
-          <li><a href="#areas">Derecho Mercantil</a></li>
-          <li><a href="#areas">Derecho Inmobiliario</a></li>
+          <li><a href="#civil">Derecho Civil</a></li>
+          <li><a href="#penal">Derecho Penal</a></li>
+          <li><a href="#laboral">Derecho Laboral</a></li>
+          <li><a href="#mercantil">Derecho Mercantil</a></li>
+          <li><a href="#inmobiliario">Derecho Inmobiliario</a></li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -734,13 +789,13 @@ h2.section-title em{font-style:normal;color:var(--accent)}
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="year">2026</span> MARTÍNEZ &amp; ASOCIADOS · Sitio demostrativo</span>
+      <span>© <span id="year">2026</span> Martínez &amp; Asociados Abogados · Demo</span>
       <span><a href="https://whitemoon.es" target="_blank" rel="noopener">Powered by WhiteMoon IA</a> · Esta web es una demo, no es un despacho real</span>
     </div>
   </div>
 </footer>
 
-<!-- LEX — asistente guiado del despacho (captación de leads a Supabase) -->
+<!-- LEX — asistente guiado de MARTÍNEZ & ASOCIADOS (captación de leads a Supabase) -->
 <script src="chatbot.js" defer></script>
 
 <script>
@@ -768,20 +823,6 @@ h2.section-title em{font-style:normal;color:var(--accent)}
       if(d.open){items.forEach(function(o){if(o!==d)o.open=false;});}
     });
   });
-
-  // Palabras rotatorias del hero ("Derecho …")
-  var words=["Civil","Penal","Laboral","Mercantil","Inmobiliario"];
-  var wi=0, wEl=document.getElementById('rotWord');
-  if(wEl && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    setInterval(function(){
-      wEl.style.opacity='0';wEl.style.transform='translateY(6px)';
-      setTimeout(function(){
-        wi=(wi+1)%words.length;
-        wEl.textContent=words[wi];
-        wEl.style.opacity='1';wEl.style.transform='translateY(0)';
-      },280);
-    },2600);
-  }
 
   // Reveal on scroll — content already visible by default; this is enhancement only
   var reveals=document.querySelectorAll('.reveal');

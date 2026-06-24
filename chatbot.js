@@ -1,13 +1,17 @@
 /*
- * LEX — asistente guiado de MARTÍNEZ & ASOCIADOS (demo)
- * Widget de captación de leads para un despacho de abogados en Madrid.
+ * LEX — asistente guiado de MARTÍNEZ & ASOCIADOS
+ * Widget de captación de leads para la demo de despacho de abogados
+ * (civil, penal, laboral, mercantil e inmobiliario en Madrid).
  *
- * LEX es profesional, discreto y serio. NUNCA ofrece asesoramiento jurídico
- * concreto: solo recoge el área, una descripción breve y los datos de contacto
- * para que un abogado del despacho contacte al interesado.
+ * Clon estructural del asistente de FONGASCA: misma máquina de estados
+ * (categoría → subservicio → [reclamación → cuantía] → zona → nombre → teléfono).
+ * LEX es profesional, discreto y serio: NO ofrece asesoramiento jurídico concreto,
+ * solo recoge los datos para que un abogado del despacho contacte al interesado.
  *
- * Al completar el flujo inserta el lead en Supabase (tabla leads_web) y avisa
- * por WhatsApp vía CallMeBot (patrón Fongasca). Sin dependencias externas.
+ * Al completar el flujo inserta el lead en Supabase (tabla leads_web)
+ * usando la clave publishable (RLS: "Allow anonymous inserts").
+ *
+ * Sin dependencias. Se autoinyecta estilos y DOM.
  */
 (function () {
   "use strict";
@@ -16,10 +20,8 @@
 
   /* ---------- Config ---------- */
   var SUPABASE_URL = "https://mlaqtniujnvfxcvcourm.supabase.co";
-  var SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sYXF0bml1am52ZnhjdmNvdXJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MzUyMzIsImV4cCI6MjA5MzQxMTIzMn0.Neh7VUS8ADsxf0DPab0JoJyGXOAXnLIaXzXbKzj2BGs";
+  var SUPABASE_KEY = "sb_publishable_6no6BuOgiA_2nonTJntAuQ_DTqEgrcV";
   var LEADS_TABLE = "leads_web";
-  var SECTOR = "abogados";
-  var ORIGEN = "abogados-demo";
 
   var ACCENT = "#1a4fd6";
 
@@ -29,12 +31,23 @@
   var CALLMEBOT_PHONE = "34643199580";
   var CALLMEBOT_APIKEY = "";
 
-  /* ---------- Flujo guiado ---------- */
-  var AREAS = ["Civil", "Penal", "Laboral", "Mercantil", "Inmobiliario", "Otro"];
-  var CALENDARIO = ["Esta semana", "La próxima semana", "Mañanas", "Tardes"];
+  /* ---------- Flujo de áreas (categoría → subservicio) ---------- */
+  var CATEGORIAS = ["⚖️ Civil", "🛡️ Penal", "💼 Laboral", "🏢 Mercantil", "🏠 Inmobiliario", "📋 Otros"];
+  var SUBSERVICIOS = {
+    "Civil": ["Divorcio / Familia", "Herencias", "Contratos", "Reclamación de cantidad"],
+    "Penal": ["Defensa penal", "Asistencia al detenido", "Recurso", "Soy víctima / denuncia"],
+    "Laboral": ["Despido", "ERE / ERTE", "Reclamación salarial", "Accidente laboral"],
+    "Mercantil": ["Constituir sociedad", "Concurso de acreedores", "Contratos mercantiles", "Reclamación de impagos"],
+    "Inmobiliario": ["Compraventa", "Arrendamiento", "Comunidad de propietarios", "Desahucio"],
+    "Otros": ["Consulta general", "Otra materia"]
+  };
+  /* Asuntos en los que pedimos cuantía estimada (equivalente a la rama de reformas de Fongasca) */
+  var RECLAMACIONES = ["Reclamación de cantidad", "Reclamación salarial", "Reclamación de impagos"];
+  var CUANTIAS = ["Menos de 3.000€", "3.000€ - 10.000€", "10.000€ - 50.000€", "Más de 50.000€"];
+  var ZONAS = ["Madrid capital", "Comunidad de Madrid", "Otra provincia", "Online / videollamada"];
 
   /* ---------- Estado ---------- */
-  var state = { area: "", descripcion: "", calendario: "", nombre: "", telefono: "" };
+  var state = { categoria: "", servicio: "", reclama: false, cuantia: "", zona: "", nombre: "", telefono: "" };
   var els = {};
 
   /* ---------- Estilos ---------- */
@@ -50,7 +63,7 @@
     ".lex-fab[aria-expanded=true]{transform:scale(.9);opacity:.85}" +
 
     ".lex-panel{position:fixed;right:clamp(16px,3vw,28px);bottom:calc(clamp(16px,3vw,28px) + 74px);z-index:2147483000;" +
-      "width:min(330px,calc(100vw - 32px));height:min(490px,calc(100vh - 120px));" +
+      "width:min(320px,calc(100vw - 32px));height:min(480px,calc(100vh - 120px));" +
       "background:#0d0d0d;border:1px solid #2a2a2a;border-radius:18px;overflow:hidden;display:none;flex-direction:column;" +
       "font-family:'Sora',system-ui,-apple-system,sans-serif;color:#F5F5F5;" +
       "box-shadow:0 24px 60px rgba(0,0,0,.6);opacity:0;transform:translateY(14px) scale(.98);" +
@@ -88,6 +101,7 @@
       "padding:8px 13px;border-radius:10px;cursor:pointer;min-height:36px;transition:border-color .18s,background .18s,transform .12s}" +
     ".lex-chip:hover{border-color:" + ACCENT + ";background:#1d1d1d}" +
     ".lex-chip:active{transform:scale(.97)}" +
+    ".lex-chip.urg{border-color:" + ACCENT + ";color:" + ACCENT + ";font-weight:600}" +
 
     ".lex-foot{flex:none;border-top:1px solid #2a2a2a;padding:12px;background:#0d0d0d}" +
     ".lex-form{display:flex;gap:9px}" +
@@ -110,10 +124,10 @@
     "@media (prefers-reduced-motion: reduce){" +
       ".lex-panel,.lex-fab,.lex-chip,.lex-send{transition:none}" +
       ".lex-typing i{animation:none}.lex-body{scroll-behavior:auto}}" +
-    "@media (max-width:600px){.lex-panel{right:8px;left:8px;width:auto;bottom:84px;height:min(68vh,490px)}}";
+    "@media (max-width:600px){.lex-panel{right:8px;left:8px;width:auto;bottom:84px;height:min(68vh,480px)}}";
 
   /* ---------- Iconos ---------- */
-  var SCALE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M6 21h12M3 7h18M7 7l-3 7a3 3 0 0 0 6 0L7 7zm10 0l-3 7a3 3 0 0 0 6 0l-3-7zM12 3l5 4M12 3L7 7"/></svg>';
+  var SCALE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M6 21h12M3 7h18M7 7l-3 7a3 3 0 0 0 6 0L7 7zm10 0l-3 7a3 3 0 0 0 6 0l-3-7z"/></svg>';
   var CLOSE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';
   var SEND = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>';
 
@@ -171,7 +185,8 @@
 
   /* ---------- Abrir / cerrar ---------- */
   var opened = false;
-  function toggle() { els.panel.classList.contains("open") ? close() : open(); }
+  function toggle() { panel().classList.contains("open") ? close() : open(); }
+  function panel() { return els.panel; }
 
   function open() {
     els.panel.classList.add("open");
@@ -212,12 +227,12 @@
     scroll();
   }
 
-  function options(list, onPick) {
+  function options(list, onPick, urgentLabel) {
     var wrap = document.createElement("div");
     wrap.className = "lex-opts";
     list.forEach(function (label) {
       var b = document.createElement("button");
-      b.className = "lex-chip";
+      b.className = "lex-chip" + (label === urgentLabel ? " urg" : "");
       b.type = "button";
       b.textContent = label;
       b.addEventListener("click", function () {
@@ -250,32 +265,50 @@
   var step = "";
 
   function startFlow() {
-    botMsg("Buenos días. Soy LEX, asistente del despacho Martínez & Asociados.", function () {
-      botMsg("La primera consulta es gratuita y confidencial. Le orientaré y trasladaré su caso a un abogado del equipo (no ofrezco asesoramiento jurídico concreto).\n\n¿Sobre qué área necesita asesoramiento?", function () {
-        step = "area";
-        options(AREAS, pickArea);
+    botMsg("Buenos días, soy LEX, asistente del despacho Martínez & Asociados ⚖️ La primera consulta es gratuita y confidencial. ¿Sobre qué área necesita asesoramiento?", function () {
+      step = "categoria";
+      options(CATEGORIAS, pickCategoria);
+    });
+  }
+
+  function pickCategoria(label) {
+    var cat = label.replace(/^\S+\s+/, "").trim();
+    state.categoria = cat;
+    var q = cat === "Otros" ? "¿Qué necesita?" : "¿Qué tipo de asunto de Derecho " + cat + " es?";
+    botMsg(q, function () {
+      step = "servicio";
+      options(SUBSERVICIOS[cat], pickServicio, "Asistencia al detenido");
+    });
+  }
+
+  function pickServicio(servicio) {
+    state.servicio = servicio;
+    if (RECLAMACIONES.indexOf(servicio) !== -1) {
+      state.reclama = true;
+      botMsg("¿Cuantía aproximada que se reclama?", function () {
+        step = "cuantia";
+        options(CUANTIAS, pickCuantia);
       });
+      return;
+    }
+    askZona();
+  }
+
+  function pickCuantia(c) {
+    state.cuantia = c;
+    askZona();
+  }
+
+  function askZona() {
+    botMsg("¿Dónde se encuentra usted o su asunto?", function () {
+      step = "zona";
+      options(ZONAS, pickZona);
     });
   }
 
-  function pickArea(area) {
-    state.area = area;
-    botMsg("Entendido. Cuénteme brevemente su situación, sin entrar en datos sensibles, para orientar al abogado adecuado.", function () {
-      step = "descripcion";
-      showInput("Describa su caso en una línea", "text", "off");
-    });
-  }
-
-  function askCalendario() {
-    botMsg("Gracias. ¿Cuándo le viene mejor que le contactemos?", function () {
-      step = "calendario";
-      options(CALENDARIO, pickCalendario);
-    });
-  }
-
-  function pickCalendario(cal) {
-    state.calendario = cal;
-    botMsg("Perfecto. ¿Cuál es su nombre?", function () {
+  function pickZona(zona) {
+    state.zona = zona;
+    botMsg("¿Cuál es su nombre?", function () {
       step = "nombre";
       showInput("Escriba su nombre", "text", "name");
     });
@@ -284,18 +317,12 @@
   function onSubmit(e) {
     e.preventDefault();
     var val = els.input.value.trim();
-    if (step === "descripcion") {
-      if (val.length < 3) { showErr("Cuénteme algo más, por favor."); return; }
-      state.descripcion = val;
-      userMsg(val);
-      hideInput();
-      askCalendario();
-    } else if (step === "nombre") {
+    if (step === "nombre") {
       if (val.length < 2) { showErr("Dígame su nombre, por favor."); return; }
       state.nombre = val;
       userMsg(val);
       hideInput();
-      botMsg("¿Y un teléfono de contacto?", function () {
+      botMsg("¿Y su teléfono de contacto?", function () {
         step = "telefono";
         showInput("6XX XXX XXX", "tel", "tel");
       });
@@ -316,22 +343,22 @@
     step = "done";
     saveLead();
     notifyWhatsApp();
-    botMsg("Gracias, " + state.nombre + ". Hemos registrado su consulta sobre Derecho " + state.area + ".", function () {
-      botMsg("Nuestro equipo le contactará (" + state.calendario.toLowerCase() + ") para concretar su primera consulta gratuita.\n\nUn recordatorio: esto es una orientación inicial, no asesoramiento jurídico.");
-    });
+    botMsg("✅ Hemos recibido su consulta, " + state.nombre + ".\nNuestro equipo le contactará para concretar su primera consulta gratuita.\n\nUn recordatorio: esto es una orientación inicial, no asesoramiento jurídico.");
   }
 
   /* ---------- Supabase ---------- */
   function saveLead() {
-    var interes = "Derecho " + state.area;
-    var mensaje = interes + " · " + state.descripcion + " · Contactar: " + state.calendario;
+    var base = "Derecho " + state.categoria + " · " + state.servicio;
+    var mensaje = state.reclama
+      ? base + " · Cuantía: " + state.cuantia + " · Zona: " + state.zona
+      : base + " · Zona: " + state.zona;
     var payload = {
       nombre: state.nombre,
       telefono: state.telefono,
-      sector: SECTOR,
-      interes: interes,
+      sector: "abogados",
+      interes: base,
       mensaje: mensaje,
-      origen: ORIGEN
+      origen: "abogados-demo"
     };
     try {
       fetch(SUPABASE_URL + "/rest/v1/" + LEADS_TABLE, {
@@ -359,14 +386,11 @@
       console.warn("[LEX] CallMeBot sin apikey: se omite el aviso por WhatsApp.");
       return;
     }
-    var lines = [
-      "Nuevo lead ABOGADOS (demo)",
-      "Area: Derecho " + state.area,
-      "Caso: " + state.descripcion,
-      "Contactar: " + state.calendario,
-      "Nombre: " + state.nombre,
-      "Telefono: " + state.telefono
-    ];
+    var lines = ["Nuevo lead ABOGADOS (demo)", "Area: Derecho " + state.categoria, "Asunto: " + state.servicio];
+    if (state.reclama) {
+      lines.push("Cuantia: " + state.cuantia);
+    }
+    lines.push("Zona: " + state.zona, "Nombre: " + state.nombre, "Telefono: " + state.telefono);
     var url = "https://api.callmebot.com/whatsapp.php?phone=" + CALLMEBOT_PHONE +
       "&text=" + encodeURIComponent(lines.join("\n")) + "&apikey=" + CALLMEBOT_APIKEY;
     try {
