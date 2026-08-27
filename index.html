@@ -217,10 +217,12 @@ button{font-family:inherit;cursor:pointer}
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;height:74px}
 .brand{display:flex;align-items:center;gap:14px;min-width:0}
 .brand img{height:60px;width:auto}
-.brand-fallback{font-weight:800;letter-spacing:.02em;font-size:20px;color:var(--ink)}
+/* El wordmark no parte nunca: en escritorio va siempre en una linea.
+   A partir de 600px hacia abajo la regla movil lo pasa a dos lineas con flex-column. */
+.brand-fallback{font-weight:800;letter-spacing:.02em;font-size:20px;color:var(--ink);white-space:nowrap}
 .brand-fallback span{color:var(--fire)}
 .nav{display:flex;align-items:center;gap:34px}
-.nav a,.nav button{font-size:15px;font-weight:500;color:var(--ink-dim);position:relative;padding-block:6px;transition:color .2s ease}
+.nav a,.nav button{font-size:15px;font-weight:500;color:var(--ink-dim);position:relative;padding-block:6px;transition:color .2s ease;white-space:nowrap}
 .nav button{background:none;border:0;font-family:inherit;cursor:pointer;padding-inline:0}
 .nav a:hover,.nav button:hover{color:var(--ink)}
 .nav a::after,.nav button::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--fire);transition:width .25s ease}
@@ -231,6 +233,8 @@ button{font-family:inherit;cursor:pointer}
   padding:12px 22px;border:1px solid transparent;
   transition:transform .15s ease, background .2s ease, border-color .2s ease;
   min-height:44px;
+  /* Ningun rotulo de CTA parte en dos lineas ("Consulta gratuita", "Llamar ahora") */
+  white-space:nowrap;
 }
 .btn:active{transform:scale(.97)}
 .btn-fire{background:var(--fire);color:#fff}
