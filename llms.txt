@@ -1,0 +1,95 @@
+# Martínez & Asociados · Abogados en Madrid
+
+> Despacho de abogados en Madrid, en ejercicio desde 2004. Derecho civil, penal,
+> laboral, mercantil, familia y divorcios, herencias y sucesiones, extranjería,
+> accidentes e indemnizaciones, desahucios y reclamaciones de cantidad.
+> Primera consulta informativa sin compromiso y honorarios por escrito en la
+> hoja de encargo antes de iniciar cualquier actuación.
+
+AVISO: esta web es una DEMOSTRACIÓN creada por WhiteMoon Agencia IA. El despacho
+"Martínez & Asociados" es un ejemplo ficticio: no es un despacho real, no presta
+servicios jurídicos y no publica tarifas ni honorarios.
+
+## Contacto
+
+- Teléfono: +34 643 199 580 (tel:+34643199580)
+- Email: comercial@whitemoon.es
+- Dirección: Calle Serrano 41, 28001 Madrid
+- Horario: lunes a viernes de 9:00 a 19:00. Sábado y domingo cerrado.
+- Web: https://nexusforgeia.github.io/WHITEMOON-ABOGADOS/
+
+## Datos clave
+
+- En ejercicio en Madrid desde 2004
+- 10 áreas de práctica cubiertas
+- Primera consulta informativa sin compromiso
+- Honorarios cerrados y por escrito antes de iniciar (hoja de encargo)
+- Atención presencial en Madrid o por videollamada para toda España
+- Secreto profesional y cumplimiento del RGPD
+- Sin promesas de resultado ni porcentajes de éxito
+
+## Áreas de práctica
+
+- **Derecho civil** — contratos, reclamaciones de cantidad, responsabilidad civil
+  y conflictos entre particulares.
+- **Derecho penal** — defensa penal, asistencia al detenido en comisaría o juzgado
+  de guardia, recursos y acusación particular.
+- **Derecho laboral** — despidos, EREs y ERTEs, reclamación de salarios,
+  accidentes de trabajo e incapacidades.
+- **Derecho mercantil** — constitución de sociedades, pactos de socios, contratos
+  mercantiles, impagos entre empresas y concurso de acreedores.
+- **Familia y divorcios** — divorcios de mutuo acuerdo y contenciosos, custodia y
+  régimen de visitas, pensiones y modificación de medidas.
+- **Herencias y sucesiones** — testamentos, aceptación y partición de herencia,
+  legítimas, herederos enfrentados e impuesto de sucesiones.
+- **Extranjería** — residencia y arraigo, reagrupación familiar, renovaciones,
+  nacionalidad española y recursos frente a denegaciones.
+- **Accidentes e indemnizaciones** — accidentes de tráfico y atropellos,
+  responsabilidad civil y reclamación extrajudicial a aseguradoras.
+- **Desahucios y arrendamientos** — desahucio por impago o por expiración del
+  plazo, defensa del arrendatario y comunidad de propietarios.
+- **Reclamaciones de cantidad** — vía extrajudicial, procedimiento monitorio y
+  procedimiento declarativo, entre particulares y entre empresas.
+
+## Cómo se pide cita
+
+1. Cuéntanos el caso por el chat (asistente LEX) o por teléfono, y elige día y hora.
+2. Primera consulta: se revisa la documentación y se explican las opciones y los plazos.
+3. Hoja de encargo con los honorarios, gastos y suplidos por escrito antes de iniciar.
+4. Dirección letrada: un abogado responsable del asunto que informa en cada fase.
+
+El asistente LEX no da asesoramiento jurídico ni facilita honorarios: recoge el
+área, el día y la hora, el nombre y el teléfono para que llame un abogado. La cita
+queda siempre pendiente de confirmación telefónica.
+
+## Preguntas frecuentes
+
+### ¿Cómo pido cita con el despacho?
+Habla con LEX, el asistente. Eliges el área, el día y la hora, dejas tu nombre y
+teléfono, y el despacho te llama para confirmar la cita informativa.
+
+### ¿La primera consulta compromete a algo?
+No. Es una consulta informativa y sin compromiso. El asistente del chat no da
+asesoramiento jurídico: solo recoge tus datos para que te llame un abogado.
+
+### ¿Sabré lo que cuesta antes de empezar?
+Sí. Los honorarios se concretan por escrito en la hoja de encargo antes de iniciar
+cualquier actuación, junto con los gastos y suplidos que pueda llevar el asunto.
+
+### ¿Atendéis asuntos fuera de Madrid?
+Sí. Se atiende por videollamada y gestión documental digital, y se comparece en el
+juzgado que corresponda cuando el procedimiento lo requiere.
+
+### ¿Ofrecéis asistencia al detenido?
+Sí, para comisaría o juzgado de guardia. Si se trata de una situación urgente, lo
+más rápido es llamar al 643 199 580.
+
+### ¿Qué pasa con la confidencialidad de mis datos?
+Todo queda amparado por el secreto profesional del abogado y por el RGPD. Los datos
+no se ceden a terceros.
+
+## Sobre esta demo
+
+Demo construida por WhiteMoon Agencia IA (Majadahonda, Madrid) para mostrar cómo
+un despacho de abogados puede captar y cualificar consultas con un agente IA en la
+web. Más información en https://whitemoon.es
