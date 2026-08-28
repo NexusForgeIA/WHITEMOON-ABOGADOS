@@ -898,10 +898,17 @@ window.addEventListener('DOMContentLoaded', function(){
    que trata el area, agenda una cita informativa y recoge nombre + telefono
    para que llame un abogado del despacho.
 
-   El lead viaja UNICAMENTE a la Edge Function abogados-notify (verify_jwt:false),
-   que inserta en leads_web con la service role key y avisa por Telegram. Por eso
-   aqui no hay ninguna clave de Supabase: ni siquiera la publishable. */
-const NOTIFY_FN = 'https://mlaqtniujnvfxcvcourm.supabase.co/functions/v1/abogados-notify';
+   Captura del lead en dos vias independientes, para no perder ninguno:
+     1. saveLead()   -> INSERT directo en leads_web con la publishable key.
+     2. notifyLead() -> aviso por Telegram via Edge Function abogados-notify.
+   Si la funcion cae, el lead sigue quedando en leads_web; si falla la BBDD, el
+   aviso de Telegram sigue saliendo. La publishable key es publica por diseno y
+   la tabla solo admite INSERT para el rol anon (RLS). El token del bot de
+   Telegram vive en los Secrets de la funcion, nunca aqui. */
+const SUPABASE_URL = 'https://mlaqtniujnvfxcvcourm.supabase.co';
+const SUPABASE_ANON = 'sb_publishable_6no6BuOgiA_2nonTJntAuQ_DTqEgrcV';
+const LEADS_URL = SUPABASE_URL + '/rest/v1/leads_web';
+const NOTIFY_FN = SUPABASE_URL + '/functions/v1/abogados-notify';
 const DESPACHO = 'Martínez & Asociados';
 const chat = document.getElementById('chat');
 const fab = document.getElementById('fab');
@@ -1028,8 +1035,40 @@ function pickHora(h,btn){
   estado='esperando_nombre'; showTyping();
   setTimeout(()=>{ hideTyping(); botSay('Anotado. ¿A nombre de quién pongo la cita?'); },450);
 }
-/* Aviso a la Edge Function abogados-notify: inserta el lead en leads_web
-   (service role, server-side) y avisa al despacho por Telegram.
+/* Guarda el lead en leads_web con la publishable key. Es la via principal de
+   captura y no depende de la Edge Function: aunque abogados-notify este caida,
+   el lead queda en la BBDD.
+
+   keepalive:true es lo que mantiene viva la peticion si el usuario cierra la
+   pestana justo despues de dar el telefono. Aqui NO sirve sendBeacon: PostgREST
+   rechaza el Content-Type text/plain que exige una peticion simple
+   (PGRST102 "Content-Type not acceptable"), y con application/json el navegador
+   lanzaria un preflight CORS que sendBeacon no sabe hacer. */
+function saveLead(nombre,telefono,area,citaDia,citaHora){
+  const cita = (citaDia||citaHora) ? ('Cita informativa: '+(citaDia||'-')+(citaHora?' a las '+citaHora:'')) : 'Sin cita elegida';
+  return fetch(LEADS_URL,{
+    method:'POST',
+    keepalive:true,
+    headers:{
+      'Content-Type':'application/json',
+      'apikey':SUPABASE_ANON,
+      'Authorization':'Bearer '+SUPABASE_ANON,
+      'Prefer':'return=minimal'
+    },
+    body:JSON.stringify({
+      nombre, telefono,
+      sector:'abogados',
+      interes:area,
+      mensaje:'Área: '+area+'. '+cita,
+      origen:'demo-abogados',
+      cita_dia:citaDia||null,
+      cita_hora:citaHora||null
+    })
+  }).catch(()=>{});
+}
+/* Aviso al despacho por Telegram via Edge Function abogados-notify. La funcion
+   SOLO notifica: el INSERT ya lo ha hecho saveLead(), asi que no hay fila
+   duplicada y la captura no depende de que la funcion responda.
 
    OJO con el Content-Type: tiene que ser 'text/plain;charset=UTF-8'. Con
    'application/json' deja de ser una peticion simple, Chrome lanza el preflight
@@ -1064,6 +1103,7 @@ function procesarMensaje(texto){
   if (estado==='esperando_telefono'){
     leadTelefono=texto.trim(); estado='inicio';
     const areaLead=leadArea||'Consulta general';
+    saveLead(leadNombre,leadTelefono,areaLead,leadDiaLegible,leadHora);
     notifyLead(leadNombre,leadTelefono,areaLead,leadDiaLegible,leadHora);
     const cuando = (leadDiaLegible&&leadHora) ? (' para el '+leadDiaLegible+' a las '+leadHora) : '';
     const cierre='Gracias, ' + leadNombre + '. He anotado tu consulta de ' + areaLead.toLowerCase() + cuando + ', y un abogado del despacho te llamará al ' + leadTelefono + ' para confirmarla. La cita queda pendiente de confirmación y esto no es asesoramiento jurídico: la valoración de tu caso la hace el abogado.';

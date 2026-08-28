@@ -1,13 +1,12 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
-// abogados-notify — captura de lead + aviso por Telegram de una nueva CONSULTA
-// de la demo WhiteMoon · Martínez & Asociados (chatbot "LEX").
+// abogados-notify — SOLO notificación por Telegram de una nueva CONSULTA de la
+// demo WhiteMoon · Martínez & Asociados (chatbot "LEX").
 //
-// Mismo patrón que talleres-notify en cuanto al aviso (token de Telegram solo en
-// Secrets, verify_jwt:false, guard nombre+telefono -> 400). La diferencia es que
-// aquí el INSERT en leads_web también se hace server-side con la service role:
-// así el cliente no maneja NINGUNA clave de Supabase, ni siquiera la publishable,
-// y no hay riesgo de insertar la fila dos veces.
+// Esta función NO toca la base de datos. El lead lo inserta el propio cliente en
+// leads_web con la publishable key (RLS: insert-only para anon), así la captura
+// no depende de que esta función responda y no hay riesgo de fila duplicada.
+// Mismo patrón que talleres-notify.
 //
 // Recibe (POST JSON): { despacho, nombre, telefono, interes, mensaje,
 //                       cita_dia, cita_hora, origen, test? }
@@ -17,15 +16,13 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 // una petición simple y no dispara preflight CORS.
 //
 // Secrets usados (nunca en cliente):
-//   - TELEGRAM_BOT_TOKEN        : token del bot de Telegram (obligatorio)
-//   - TELEGRAM_CHAT_ID          : chat destino; si falta se usa CHAT_ID_FALLBACK
-//   - SUPABASE_URL              : inyectado por la plataforma
-//   - SUPABASE_SERVICE_ROLE_KEY : inyectado por la plataforma
+//   - TELEGRAM_BOT_TOKEN : token del bot de Telegram (obligatorio)
+//   - TELEGRAM_CHAT_ID   : chat destino; si falta se usa CHAT_ID_FALLBACK
 //
 // IMPORTANTE: es una SOLICITUD de consulta de una DEMO, no una cita confirmada.
 //
-// Regla del proyecto: si el insert o el envío fallan → console.warn, nunca
-// interrumpe la conversación del chatbot.
+// Regla del proyecto: si el envío falla → console.warn, nunca interrumpe la
+// conversación del chatbot.
 //
 // Desplegar con:
 //   supabase functions deploy abogados-notify --no-verify-jwt --project-ref mlaqtniujnvfxcvcourm
@@ -74,8 +71,7 @@ Deno.serve(async (req: Request) => {
   const soloPrueba = data.test === true;
 
   // Guard de lead incompleto — estándar WhiteMoon.
-  // Un lead solo es válido con nombre Y teléfono: sin ambos no se inserta
-  // nada ni se avisa.
+  // Un lead solo es válido con nombre Y teléfono: sin ambos no se avisa.
   if (!nombre || !telefono) {
     return json({ ok: false, error: "lead incompleto" }, 400);
   }
@@ -87,44 +83,6 @@ Deno.serve(async (req: Request) => {
     ? `${citaDia || "-"}${citaHora ? " a las " + citaHora : ""}`
     : "";
 
-  // 1) Lead en leads_web (service role → no requiere clave en el cliente)
-  let stored = false;
-  try {
-    const supaUrl = Deno.env.get("SUPABASE_URL");
-    const supaKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-    if (supaUrl && supaKey) {
-      const r = await fetch(`${supaUrl}/rest/v1/leads_web`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          apikey: supaKey,
-          Authorization: `Bearer ${supaKey}`,
-          Prefer: "return=minimal",
-        },
-        body: JSON.stringify({
-          nombre: nombre || null,
-          telefono: telefono || null,
-          sector: "abogados",
-          interes: interes || "consulta",
-          mensaje: mensaje || null,
-          origen,
-          cita_dia: citaDia || null,
-          cita_hora: citaHora || null,
-          fecha: new Date().toISOString(),
-        }),
-      });
-      stored = r.ok;
-      if (!r.ok) {
-        console.warn("[abogados-notify] insert leads_web falló:", r.status, await r.text());
-      }
-    } else {
-      console.warn("[abogados-notify] sin SUPABASE_URL/SERVICE_ROLE_KEY, lead no guardado");
-    }
-  } catch (e) {
-    console.warn("[abogados-notify] error insertando lead:", e);
-  }
-
-  // 2) Aviso por Telegram
   const message =
     (soloPrueba
       ? `🧪 PRUEBA — demo WhiteMoon · ${despacho}\n\n`
@@ -162,5 +120,5 @@ Deno.serve(async (req: Request) => {
     console.warn("[abogados-notify] error enviando Telegram:", e);
   }
 
-  return json({ ok: true, stored, notified });
+  return json({ ok: true, notified });
 });
